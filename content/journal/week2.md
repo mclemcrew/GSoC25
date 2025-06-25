@@ -1,4 +1,3 @@
-
 ---
 title: "Week 2: TUI Development and ICMC"
 description: "Creation of an interactive UI element for program generation/evaluation."
@@ -14,7 +13,7 @@ This week's focus was split between initial development on a Textual-based TUI f
 
 ### Textual TUI
 
-I began prototyping a terminal user interface (TUI) using the Textual framework. The goal of this TUI is to provide an interactive and user-friendly way to interact with the Tölvera system directly from the command line, which will be especially helpful for the natural language interface.
+I began prototyping a terminal user interface (TUI) using the Textual framework. The goal of this TUI is to provide an interactive and user-friendly way to interact with the Tölvera system directly from the command line, which will be especially helpful for the natural language interface.  Code is available here: https://github.com/mclemcrew/tolvera/blob/tv-llm-pydantic-ai/src/tolvera/llm/tui_example.py
 ![[Pasted image 20250625071729.png]]
 ### International Computer Music Conference
 

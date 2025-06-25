@@ -1,4 +1,3 @@
-
 ---
 title: "Week 1: Architectural Re-evaluation and Interface Survey"
 description: "A pragmatic re-evaluation of the core NLI architecture, comparing Pydantic against TypeChat, and a survey of existing terminal interfaces to inform the project's design."
