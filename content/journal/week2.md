@@ -1,12 +1,10 @@
 
 ---
 title: "Week 2: TUI Development and ICMC"
-description: "A pragmatic re-evaluation of the core NLI architecture, comparing Pydantic against TypeChat, and a survey of existing terminal interfaces to inform the project's design."
+description: "Creation of an interactive UI element for program generation/evaluation."
 tags:
   - journal-entry
-  - technical-design
-  - pydantic
-  - typechat
+  - tui
   - cli
   - gsoc
 ---
