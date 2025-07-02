@@ -1,6 +1,6 @@
 ---
-title: "Week 5: A New Architecture - Product of Experts (PoE)"
-description: "Pivoting from MoE to a more robust, dynamic, and Taichi-native PoE system."
+title: "Week 5: A New Architecture - Product of Programmatic Experts (PoE)"
+description: "Pivoting from MoE to a more robust, dynamic, and Taichi-native Product of Programmatic Experts system."
 tags:
   - journal-entry
   - poe
@@ -9,9 +9,9 @@ tags:
   - gsoc
 ---
 
-### Week 5: A New Architecture - Product of Experts (PoE)
+### Week 5: A New Architecture - Product of Programmatic Experts (PoE)
 
-After initial explorations with a Mixture of Experts (MoE) architecture [last week](week4.md), it became apparent that the approach was not well-suited for generating dynamic Tölvera sketches. It was alright...but basically ended up with a lot of having to create so many different experts in a deterministic way, it essentially ruined the reason for using natural language in the first place. While modular in theory, the reliance on rigid JSON schemas and the architectural mismatch between Python-level orchestration and the Taichi runtime introduced a ton of implementation challenges that I met along the way. Consequently, this week's work pivoted to a Product of Programming Experts (PoE) system, which turned out to be a more flexible and powerful architecture and will probably stick with this going forward.
+After initial explorations with a Mixture of Experts (MoE) architecture [last week](week4.md), it became apparent that the approach was not well-suited for generating dynamic Tölvera sketches. It was alright...but basically ended up with a lot of having to create so many different experts in a deterministic way, it essentially ruined the reason for using natural language in the first place. While modular in theory, the reliance on rigid JSON schemas and the architectural mismatch between Python-level orchestration and the Taichi runtime introduced a ton of implementation challenges that I met along the way. Consequently, this week's work pivoted to a Product of Programmatic Experts (PoE) system, which turned out to be a more flexible and powerful architecture and will probably stick with this going forward.
 
 The code for this week can be seen [here](https://github.com/mclemcrew/tolvera/tree/poe-example/src/tolvera/llm) and the demo file is [poe_demo.py](https://github.com/mclemcrew/tolvera/blob/poe-example/examples/poe_demo.py).
 
