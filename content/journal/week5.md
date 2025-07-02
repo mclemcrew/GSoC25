@@ -13,7 +13,7 @@ tags:
 
 After initial explorations with a Mixture of Experts (MoE) architecture [last week](week4.md), it became apparent that the approach was not well-suited for generating dynamic Tölvera sketches. It was alright...but basically ended up with a lot of having to create so many different experts in a deterministic way, it essentially ruined the reason for using natural language in the first place. While modular in theory, the reliance on rigid JSON schemas and the architectural mismatch between Python-level orchestration and the Taichi runtime introduced a ton of implementation challenges that I met along the way. Consequently, this week's work pivoted to a Product of Programming Experts (PoE) system, which turned out to be a more flexible and powerful architecture and will probably stick with this going forward.
 
-The code for this week can be seen here:
+The code for this week can be seen [here](https://github.com/mclemcrew/tolvera/tree/poe-example/src/tolvera/llm) and the demo file is [poe_demo.py](https://github.com/mclemcrew/tolvera/blob/poe-example/examples/poe_demo.py).
 
 #### The Shift to a Force-Based, Dynamic System
 
@@ -54,64 +54,130 @@ To illustrate the flexibility and power of the PoE architecture, here are a few 
 
 ![[demo1.mp4]]
 
-| User Description         | Generated Expert Code | Included Experts |
-| ------------------------ | --------------------- | ---------------- |
-| particles fall downwards | ```python             |
+<table>
+<tr>
+<td> User Description </td>
+<td> Generated Expert Code </td>
+<td> Included Experts </td>
+</tr>
+<tr>
+<td> particles fall downward strongly </td>
+<td>
 
+```python
 @ti.func
-def expert_gravity(pos: ti.math.vec2, vel: ti.math.vec2, mass: ti.f32) -> ti.math.vec2: # Apply a constant downward force (gravity)
-gravity_strength = 9.8
-return ti.Vector([0.0, -gravity_strength * mass])
-``` | [`expert_gravity`] |
+def expert_gravity(pos: ti.math.vec2, vel: ti.math.vec2, mass: ti.f32) -> ti.math.vec2:
+    # Apply a constant downward force (gravity)
+    gravity_strength = 9.8
+    return ti.Vector([0.0, -gravity_strength * mass])
+```
+
+</td>
+<td>
+
+`expert_gravity`
+
+</td>
+</tr>
+</table>
 
 ##### Demo 2: Attraction to Center
 
 ![[demo2.mp4]]
 
-| User Description                              | Generated Expert Code | Included Experts |
-| --------------------------------------------- | --------------------- | ---------------- |
-| particles attract to the center of the screen | ```python             |
+<table>
+<tr>
+<td> User Description </td>
+<td> Generated Expert Code </td>
+<td> Included Experts </td>
+</tr>
+<tr>
+<td> particles are attracted to the center of the screen and move quickly </td>
+<td>
 
+```python
 @ti.func
 def expert_attract_to_center(pos: ti.math.vec2, vel: ti.math.vec2, mass: ti.f32) -> ti.math.vec2:
-center = ti.Vector([tv.x / 2, tv.y / 2])
-to_center = center - pos
-dist = to_center.norm()
-force = ti.Vector([0.0, 0.0])
-if dist > 1.0: # Normalize the direction vector and apply a strong force
-force = (to_center / dist) \* 1500.0 # High strength for quick movement
-return force
-``` | [`expert_attract_to_center`] |
+    center = ti.Vector([tv.x / 2, tv.y / 2])
+    to_center = center - pos
+    dist = to_center.norm()
+    force = ti.Vector([0.0, 0.0])
+    if dist > 1.0:  # Normalize the direction vector and apply a strong force
+        force = (to_center / dist) * 1500.0  # High strength for quick movement
+    return force
+```
+
+</td>
+<td>
+
+`expert_attract_to_center`
+
+</td>
+</tr>
+</table>
 
 ##### Demo 3: Movement to the Right
 
 ![[demo3.mp4]]
 
-| User Description            | Generated Expert Code | Included Experts |
-| --------------------------- | --------------------- | ---------------- |
-| particles move to the right | ```python             |
+<table>
+<tr>
+<td> User Description </td>
+<td> Generated Expert Code </td>
+<td> Included Experts </td>
+</tr>
+<tr>
+<td> particles move to the right </td>
+<td>
 
+```python
 @ti.func
-def expert_move_right(pos: ti.math.vec2, vel: ti.math.vec2, mass: ti.f32) -> ti.math.vec2: # Apply a constant force to the right.
-force_strength = 200.0
-return ti.Vector([force_strength, 0.0])
-``` | [`expert_move_right`] |
+def expert_move_right(pos: ti.math.vec2, vel: ti.math.vec2, mass: ti.f32) -> ti.math.vec2:
+    # Apply a constant force to the right.
+    force_strength = 200.0
+    return ti.Vector([force_strength, 0.0])
+```
+
+</td>
+<td>
+
+`expert_move_right`
+
+</td>
+</tr>
+</table>
 
 ##### Demo 4: Repulsion from Center
 
 ![[demo4.mp4]]
 
-| User Description                                 | Generated Expert Code | Included Experts |
-| ------------------------------------------------ | --------------------- | ---------------- |
-| particles rapidly repel the center of the screen | ```python             |
+<table>
+<tr>
+<td> User Description </td>
+<td> Generated Expert Code </td>
+<td> Included Experts </td>
+</tr>
+<tr>
+<td> particles rapidly repel the center of the screen </td>
+<td>
 
+```python
 @ti.func
 def expert_repel_from_center(pos: ti.math.vec2, vel: ti.math.vec2, mass: ti.f32) -> ti.math.vec2:
-center = ti.Vector([tv.x / 2, tv.y / 2])
-from_center = pos - center
-dist = from_center.norm()
-force = ti.Vector([0.0, 0.0])
-if dist > 0.1: # Apply a strong repulsive force that decreases with distance
-force = (from_center / dist) \* (50000.0 / (dist + 1.0))
-return force
-``` | [`expert_repel_from_center`] |
+    center = ti.Vector([tv.x / 2, tv.y / 2])
+    from_center = pos - center
+    dist = from_center.norm()
+    force = ti.Vector([0.0, 0.0])
+    if dist > 0.1:  # Apply a strong repulsive force that decreases with distance
+        force = (from_center / dist) * (50000.0 / (dist + 1.0))
+    return force
+```
+
+</td>
+<td>
+
+`expert_repel_from_center`
+
+</td>
+</tr>
+</table>
