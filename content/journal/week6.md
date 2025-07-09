@@ -13,6 +13,8 @@ tags:
 
 After getting the Product of Programmatic Experts (PoE) system up and running [last week](week5.md), the next step was to move beyond simple, independent particle behaviors. It was cool (because something finally worked 😅), but the particles were basically lonely little dots doing their own thing. To get the really interesting emergent behavior, the particles needed to be aware of each other. This week was all about making that happen, and tackling the annoying little errors the LLM likes to make along the way.
 
+The code for this week can be seen [here](https://github.com/mclemcrew/tolvera/tree/poe-interaction-demo) with the same demo file: [poe_demo.py](https://github.com/mclemcrew/tolvera/blob/poe-interaction-demo/examples/poe_demo.py).
+
 #### System Architecture
 
 The enhanced PoE system now supports both single-particle behaviors and multi-particle interactions. Here's how the complete flow works:
