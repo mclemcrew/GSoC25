@@ -117,7 +117,7 @@ To test the interaction-specific synthesizer, we can provide a chase prompt. The
 
 ```python
 @ti.func
-def expert*chase_species_quickly(p1: ti.template(), p2: ti.template()) -> ti.math.vec2:
+def expert_chase_species_quickly(p1: ti.template(), p2: ti.template()) -> ti.math.vec2:
 force = ti.math.vec2(0.0, 0.0)
 if p1.species == 0 and p2.species == 1:
 to_other = p2.pos - p1.pos
@@ -193,7 +193,7 @@ The most powerful feature is combining different expert types. Here, we create a
 
 ```python
 @ti.func
-def expert*hunt_flee_species(p1: ti.template(), p2: ti.template()) -> ti.math.vec2:
+def expert_hunt_flee_species(p1: ti.template(), p2: ti.template()) -> ti.math.vec2:
 force = ti.math.vec2(0.0, 0.0) # Check both directions for symmetric interaction
 if (p1.species == 0 and p2.species == 1) or (p1.species == 1 and p2.species == 0):
 to_other = p2.pos - p1.pos
