@@ -115,7 +115,7 @@ To test the interaction-specific synthesizer, we can provide a chase prompt. The
 <td> species 0 chases species 1 quickly </td>
 <td>
 
-'''python
+```python
 @ti.func
 def expert*chase_species_quickly(p1: ti.template(), p2: ti.template()) -> ti.math.vec2:
 force = ti.math.vec2(0.0, 0.0)
@@ -127,7 +127,7 @@ strength = 400.0 * (1.0 - dist / 300.0)
 direction = to*other / dist
 force = direction * strength
 return force
-'''
+```
 
 </td>
 <td>
@@ -154,7 +154,7 @@ Here, we test a different kind of interaction where particles of the same specie
 <td> both species flock together within their own groups </td>
 <td>
 
-'''python
+```python
 @ti.func
 def expert_flock_within_species(p1: ti.template(), p2: ti.template()) -> ti.math.vec2:
 force = ti.math.vec2(0.0, 0.0) # Flocking behavior within the same species group
@@ -164,7 +164,7 @@ dist = to_other.norm()
 if dist > 0.0 and dist < 50.0: # Flocking with distance-based strength
 force = (to_other / dist) \* 100.0
 return force
-'''
+```
 
 </td>
 <td>
@@ -191,7 +191,7 @@ The most powerful feature is combining different expert types. Here, we create a
 <td> "species 0 hunts species 1, species 1 flees from species 0 rapidly" <br><br> "particles drift randomly" </td>
 <td>
 
-'''python
+```python
 @ti.func
 def expert*hunt_flee_species(p1: ti.template(), p2: ti.template()) -> ti.math.vec2:
 force = ti.math.vec2(0.0, 0.0) # Check both directions for symmetric interaction
@@ -210,7 +210,7 @@ return force
         force = ti.math.vec2(ti.cos(angle) * force_magnitude, ti.sin(angle) * force_magnitude)
         return force
 
-'''
+```
 
 </td>
 <td>
