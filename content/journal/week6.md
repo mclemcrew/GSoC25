@@ -1,5 +1,5 @@
 ---
-title: "Week 6: Interactions, Self-Correction, and a Spellbook"
+title: "Week 6: Interactions, Self-Correction, and a Database of Generated Functions"
 description: "This week, we focused on enhancing the PoE system's capabilities by introducing inter-particle interactions, an automated error-correction agent, and a repository for preserving generated code."
 tags:
   - journal-entry
@@ -9,7 +9,7 @@ tags:
   - refinement
 ---
 
-### Week 6: Giving the Experts More Brains
+### Week 6: Interaction Expert
 
 After getting the Product of Programmatic Experts (PoE) system up and running [last week](week5.md), the next step was to move beyond simple, independent particle behaviors. It was cool (because something finally worked 😅), but the particles were basically lonely little dots doing their own thing. To get the really interesting emergent behavior, the particles needed to be aware of each other. This week was all about making that happen, and tackling the annoying little errors the LLM likes to make along the way.
 
