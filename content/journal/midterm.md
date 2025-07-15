@@ -349,7 +349,7 @@ class SpatialFieldManager:
 
 #### 3.2 Pheromone System Experts
 
-# Pheromone diffusion kernel
+##### Pheromone diffusion kernel
 
 I haven't tested any of this and really don't know if this will work, but this would be really neat if possible :)
 
