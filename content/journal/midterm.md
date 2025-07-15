@@ -546,7 +546,7 @@ Feature freeze and clean up code here.
 
 ---
 
-## Week 6 (Aug 19-25): CLI, Integration & Polish
+## Week 6 (Aug 18-24): CLI, Integration & Polish
 
 ### Goal
 
