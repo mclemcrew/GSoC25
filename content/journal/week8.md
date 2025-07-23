@@ -466,6 +466,211 @@ filename = save_generated_sketch_to_file(agent, tv_config, state_update_code=sta
 
 This creates the final Python file.
 
+##### Final Code
+
+And here's an example of the full final generated code from this natural language:
+
+```python
+"""
+
+Dynamically generated Tölvera sketch.
+"""
+import taichi as ti
+from tolvera import Tolvera, run
+import numpy as np
+from math import pi
+
+def main(**kwargs):
+    tv = Tolvera(**kwargs)
+
+    # Species configuration: [0]
+    species_map = ti.field(dtype=ti.i32, shape=1)
+    species_map[0] = 0
+    @ti.kernel
+    def init_particles():
+        for i in range(tv.pn):
+            tv.p.field[i].active = 1.0
+            tv.p.field[i].pos = ti.Vector([ti.random() * tv.x, ti.random() * tv.y])
+            tv.p.field[i].vel = ti.Vector([0.0, 0.0])
+            tv.p.field[i].size = 5.0
+            tv.p.field[i].mass = 1.0
+            # Assign species using the mapping
+            species_index = i % 1
+            tv.p.field[i].species = species_map[species_index]
+    init_particles()
+    tv.s.species.field[0].rgba = [1.0, 0.3, 0.3, 1.0]
+
+    # Creating dynamic states
+
+    # Particle states: ['energy'] - Higher minimum energy
+    tv.s.llm_particle = {
+        "state": {
+            "energy": (ti.f32, 20.0, 500.0),  # Much higher minimum energy
+        },
+        "shape": tv.pn,
+        "osc": ("get"),
+        "randomise": True
+    }
+
+    # Global day/night multiplier
+    day_night_multiplier = ti.field(dtype=ti.f32, shape=())
+    day_night_multiplier[None] = 1.0
+
+    # ***** Temporal State Update *****
+    @ti.kernel
+    def update_temporal_states():
+        """Update time-based particle states with cyclical day/night behavior."""
+        # Define temporal constants from configuration
+        frames_per_day = 600.0  # Use actual value from temporal config
+        day_duration = 10.0  # Use actual value from temporal config
+        time_scale = 1.0  # Use actual value from temporal config
+
+        # CRITICAL: Initialize all variables BEFORE conditionals
+        current_frame = tv.ctx.i[None]
+        time_of_day = 0.0
+        energy_change = 0.0
+        activity_multiplier = 0.0
+
+        # Calculate time_of_day based on current frame
+        if frames_per_day > 0:
+            time_of_day = (current_frame % frames_per_day) / frames_per_day
+
+        # Calculate day/night activity multiplier - NEVER go to zero
+        # Range from 0.4 (night) to 1.0 (day) so movement never stops
+        activity_multiplier = 0.4 + 0.6 * ((ti.cos(time_of_day * 2 * 3.14159) + 1.0) * 0.5)
+
+        # Store global multiplier for use in force calculations
+        day_night_multiplier[None] = activity_multiplier
+
+        # Update particle states with cyclical energy behavior
+        for i in range(tv.pn):
+            # Initialize variables before conditionals
+            energy = tv.s.llm_particle.field[i].energy
+            energy_change = 0.0
+
+            # CYCLICAL energy behavior with more dramatic changes
+            if activity_multiplier > 0.7:  # DAY: energy increases
+                energy_change = 2.0 * activity_multiplier  # Faster energy gain
+            else:  # NIGHT: energy decreases
+                energy_change = -1.0 * (1.0 - activity_multiplier)  # Slower energy loss
+
+            # Apply energy change
+            energy += energy_change
+
+            # Clamp energy to reasonable bounds with higher minimum
+            if energy > 100.0:
+                energy = 100.0
+            elif energy < 50.0:  # Much higher minimum energy
+                energy = 50.0
+
+            # Update particle energy
+            tv.s.llm_particle.field[i].energy = energy
+
+    # ***** Generated Expert Functions *****
+    @ti.func
+    def expert_energy_loss(pos: ti.math.vec2, vel: ti.math.vec2, mass: ti.f32, species: ti.i32, particle_idx: ti.i32) -> ti.math.vec2:
+        # Initialize force before any conditionals
+        force = ti.math.vec2(0.0, 0.0)
+
+        # Get energy from the particle state
+        energy = tv.s.llm_particle.field[particle_idx].energy
+
+        # FIXED: Higher energy means MORE movement with stronger base force
+        energy_factor = energy / 10.0  # Range 0.5 to 1.0 now
+
+        # Random movement component - MUCH stronger base force
+        angle = ti.random() * 2 * 3.14159
+        base_force = ti.math.vec2(ti.cos(angle), ti.sin(angle)) * 1500.0  # Increased from 400 to 1500
+
+        # Apply energy factor to force
+        force = base_force * energy_factor
+
+        # Apply day/night multiplier (now ranges 0.4-1.0, never zero)
+        force *= day_night_multiplier[None]
+
+        # Simplified: just one extra boost for very active periods
+        if day_night_multiplier[None] > 0.9:  # Peak day only
+            force *= 1.3
+
+        return force
+
+    # ***** Generated Integration Kernel *****
+
+
+    @ti.kernel
+    def apply_all_experts():
+        """Main kernel that integrates all expert forces including interactions."""
+        dt = 0.016  # ~60fps timestep
+
+        for i in range(tv.pn):
+            if tv.p.field[i].active > 0:
+                # TYPED CONTEXT: Particle state
+                pos = tv.p.field[i].pos  # type: ti.math.vec2
+                vel = tv.p.field[i].vel  # type: ti.math.vec2
+                mass = tv.p.field[i].mass  # type: ti.f32
+                species = tv.p.field[i].species  # type: ti.i32
+
+                # TYPED HOLE[ti.math.vec2]: Initialize total force
+                total_force = ti.math.vec2(0.0, 0.0)
+
+
+
+                # === SINGLE-PARTICLE FORCES ===
+
+                # Apply single-particle experts
+                total_force += expert_energy_loss(pos, vel, mass, species, i) * 1.00
+
+
+
+
+                # TYPED OPERATIONS: Physics update with stronger integration
+                # Much lighter damping and stronger dt for more responsive movement
+                damping = 0.90 if day_night_multiplier[None] > 0.7 else 0.85  # Much lighter damping
+                tv.p.field[i].vel = tv.p.field[i].vel * damping + total_force * dt
+
+                # Update position based on velocity
+                new_pos = tv.p.field[i].pos + tv.p.field[i].vel * dt
+
+
+                # Boundary handling
+                # Bounce off boundaries
+                if new_pos[0] < 0:
+                    new_pos[0] = -new_pos[0]
+                    tv.p.field[i].vel[0] = -tv.p.field[i].vel[0] * 0.8  # Energy loss
+                elif new_pos[0] > tv.x:
+                    new_pos[0] = 2 * tv.x - new_pos[0]
+                    tv.p.field[i].vel[0] = -tv.p.field[i].vel[0] * 0.8
+
+                if new_pos[1] < 0:
+                    new_pos[1] = -new_pos[1]
+                    tv.p.field[i].vel[1] = -tv.p.field[i].vel[1] * 0.8
+                elif new_pos[1] > tv.y:
+                    new_pos[1] = 2 * tv.y - new_pos[1]
+                    tv.p.field[i].vel[1] = -tv.p.field[i].vel[1] * 0.8
+
+                tv.p.field[i].pos = new_pos
+
+
+
+    @tv.render
+    def _():
+        tv.px.diffuse(0.99)
+
+        tv.p()
+
+        # Update temporal states
+        update_temporal_states()
+
+        apply_all_experts()
+
+        tv.px.particles(tv.p, tv.s.species())
+
+        return tv.px
+
+if __name__ == "__main__":
+    run(main)
+```
+
 ##### Key Files
 
 - **poe_demo.py**: Entry point and orchestration
