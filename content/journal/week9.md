@@ -185,74 +185,90 @@ Here's what actually happens when you select an artificial life pattern from `po
 
 ```mermaid
 graph TD
-    A[User Selects AL Pattern<br/>e.g. 'Physarum slime mold']:::user --> B[poe_demo.py<br/>demo_artificial_life]:::entry
+    subgraph "Input & Decomposition"
+        A[User Selects AL Pattern<br/>e.g. 'Physarum slime mold']:::user
+        B[poe_demo.py<br/>demo_artificial_life]:::entry
+        C[TolveraBehaviorAgent<br/>add_expert_from_description]:::agent
+        D{BehaviorDecomposer<br/>Complex Behavior?}:::decomposer
+        E[Decompose into SubBehaviors]:::decomposer
+        F[List of Atomic Behaviors<br/>1. sense pheromones<br/>2. turn towards concentration<br/>3. move forward<br/>4. deposit trails]:::decomposer
+        G[Single Behavior]:::decomposer
 
-    B --> C[TolveraBehaviorAgent<br/>add_expert_from_description]:::agent
-    C --> D{BehaviorDecomposer<br/>Complex Behavior?}:::decomposer
+        A --> B --> C --> D
+        D -->|Yes| E --> F
+        D -->|No| G
+    end
 
-    D -->|Yes| E[Decompose into SubBehaviors]:::decomposer
-    E --> F[List of Atomic Behaviors<br/>1. sense pheromones<br/>2. turn towards concentration<br/>3. move forward<br/>4. deposit trails]:::decomposer
+    subgraph "Behavior Processing Loop"
+        H[For Each Behavior]:::loop
+        I{Keyword Classifier<br/>_keyword_classify_behavior}:::classifier
+        J[SENSOR Expert]:::sensor
+        K[DEPOSIT Expert]:::deposit
+        L[FORCE Expert]:::force
+        M[STATE_TRANSITION Expert]:::state
+        N[State Analysis<br/>StateSynthesizer]:::state_syn
+        O[Generate State Spec]:::state_syn
+        P[DynamicStateManager<br/>Create Tölvera States]:::state_mgr
+        Q[States Created]:::state_mgr
+        R[Expert Synthesis<br/>with State Context]:::synthesis
+        S[Generate Taichi Function]:::synthesis
+        T{Error Detection<br/>TaichiErrorDetector}:::error
+        U[Error Correction<br/>TaichiErrorCorrector]:::error
+        V[Add Expert to System]:::success
+        W{All Behaviors<br/>Processed?}:::loop
 
-    D -->|No| G[Single Behavior]:::decomposer
+        F --> H
+        G --> H
+        H --> I
+        I -->|'sense'| J
+        I -->|'deposit'| K
+        I -->|'turn/move'| L
+        I -->|'die/alive'| M
+        J & K & L & M --> N
+        N --> O --> P --> Q --> R --> S --> T
+        T -->|Errors Found| U --> T
+        T -->|No Errors| V --> W
+        W -->|No| H
+    end
 
-    F --> H[For Each Behavior]:::loop
-    G --> H
+    subgraph "Kernel Generation"
+        X[Select Kernel Template]:::kernel
+        Y{Expert Types?}:::kernel
+        Z[integration_kernel.j2]:::kernel
+        AA[integration_kernel_multimodal.j2]:::kernel
+        AB[Categorize Experts by Type]:::kernel
+        AC[Generate Multimodal Kernel]:::kernel
+        AD[Generate Simple Kernel]:::kernel
 
-    H --> I{Keyword Classifier<br/>_keyword_classify_behavior}:::classifier
-    I -->|'sense'| J[SENSOR Expert]:::sensor
-    I -->|'deposit'| K[DEPOSIT Expert]:::deposit
-    I -->|'turn/move'| L[FORCE Expert]:::force
-    I -->|'die/alive'| M[STATE_TRANSITION Expert]:::state
+        W -->|Yes| X --> Y
+        Y -->|Only Force| Z --> AD
+        Y -->|Mixed Types| AA --> AB --> AC --> AD
+    end
 
-    J --> N[State Analysis<br/>StateSynthesizer]:::state_syn
-    K --> N
-    L --> N
-    M --> N
+    subgraph "Finalization & Execution"
+        AE{Grid Initialization?<br/>SpeciesManager}:::species
+        AF[initialize_particles_grid]:::species
+        AG[initialize_particles_random]:::species
+        AH[Generate Temporal Updates]:::temporal
+        AI[Save to File]:::output
+        AJ[Run Sketch]:::run
+        AK[Render Loop]:::render
 
-    N --> O[Generate State Spec<br/>- pheromone_concentration<br/>- movement_speed<br/>- temporal_config]:::state_syn
+        AD --> AE
+        AE -->|Yes| AF
+        AE -->|No| AG
+        AF & AG --> AH
+        AH --> AI --> AJ --> AK
+    end
 
-    O --> P[DynamicStateManager<br/>Create Tölvera States]:::state_mgr
-    P --> Q[States Created<br/>tv.s.llm_global<br/>tv.s.llm_particle]:::state_mgr
+    subgraph "Error Handling"
+        AL[Synthesis Error]:::error_state
+        AM[Logged to CSV]:::log
+        AN[Runtime Error]:::error_state
 
-    Q --> R[Expert Synthesis<br/>with State Context]:::synthesis
-    R --> S[Generate Taichi Function<br/>Using Type-Specific Template]:::synthesis
-
-    S --> T{Error Detection<br/>TaichiErrorDetector}:::error
-    T -->|Errors Found| U[Error Correction<br/>TaichiErrorCorrector]:::error
-    U --> T
-    T -->|No Errors| V[Add Expert to System]:::success
-
-    V --> W{All Behaviors<br/>Processed?}:::loop
-    W -->|No| H
-    W -->|Yes| X[Select Kernel Template]:::kernel
-
-    X --> Y{Expert Types?}:::kernel
-    Y -->|Only Force| Z[integration_kernel.j2]:::kernel
-    Y -->|Mixed Types| AA[integration_kernel_multimodal.j2]:::kernel
-
-    AA --> AB[Categorize Experts by Type<br/>_categorize_experts_by_type]:::kernel
-    AB --> AC[Generate Multimodal Kernel<br/>Phase 1: Sensors<br/>Phase 2: State Transitions<br/>Phase 3: Forces<br/>Phase 4: Deposits]:::kernel
-
-    Z --> AD[Generate Simple Kernel]:::kernel
-    AC --> AD
-
-    AD --> AE[Grid Initialization?<br/>SpeciesManager]:::species
-    AE -->|Yes| AF[initialize_particles_grid<br/>50x50 for GoL]:::species
-    AE -->|No| AG[initialize_particles_random]:::species
-
-    AF --> AH[Generate Temporal Updates<br/>if needed]:::temporal
-    AG --> AH
-
-    AH --> AI[Save to File<br/>generated_sketch_*.py]:::output
-    AI --> AJ[Run Sketch<br/>subprocess.run()]:::run
-
-    AJ --> AK[Render Loop<br/>1. Update temporal states<br/>2. Apply all experts<br/>3. Update particles<br/>4. Draw]:::render
-
-    %% Error paths
-    S -.->|Generation Fails| AL[Synthesis Error<br/>- Wrong return type<br/>- Undefined variables<br/>- Missing parameters]:::error_state
-    AL --> AM[Logged to CSV<br/>poe_llm_interactions.csv]:::log
-
-    AK -.->|Runtime Error| AN[Execution Fails<br/>- Field access errors<br/>- Type mismatches<br/>- Taichi compilation]:::error_state
+        S -.->|Generation Fails| AL --> AM
+        AK -.->|Runtime Error| AN
+    end
 
     classDef user fill:#4ecdc4,stroke:#0b7285,stroke-width:3px,color:#fff
     classDef entry fill:#748ffc,stroke:#4c6ef5,stroke-width:3px,color:#fff
