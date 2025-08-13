@@ -18,6 +18,8 @@ tags:
 
 Week 11 was about making the synthesis system actually usable by peeps who aren't me and working on this every week. Built a TUI using Textual (based off some things we learned all the way from [week2](week2.md)) that wraps all the LLM functionality in an interactive experience. The UI features real-time sketch generation, natural language refinement with diff highlighting, and an interactive tutorial. Everything happens through natural language, but with full transparency into what the system is doing through the tracer.
 
+The code for this week can be seen [here](https://github.com/mclemcrew/tolvera/tree/week11) with the demo file: [examples/tolvera_textual_ui.py](https://github.com/mclemcrew/tolvera/blob/week11/examples/tolvera_textual_ui.py).
+
 ## The UI Architecture
 
 ### Main Components (`examples/tolvera_textual_ui.py`)
