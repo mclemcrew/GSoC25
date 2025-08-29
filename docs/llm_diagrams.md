@@ -34,7 +34,7 @@ flowchart TB
         BA --> DC
         DC -->|Yes| Components
         DC -->|No| SimplePath
-    end
+    END
 
     %% Connect to Analysis
     BO --> BA
@@ -50,7 +50,7 @@ flowchart TB
         SM --> States
         SPM --> Species
         SPM --> CR
-    end
+    END
 
     %% Connect Analysis to Detection
     Components --> SM
@@ -69,7 +69,7 @@ flowchart TB
         CS --> SuppCtx
         BaseCtx --> MergedCtx
         SuppCtx --> MergedCtx
-    end
+    END
 
     %% Connect to Context
     Components --> CS
@@ -88,7 +88,7 @@ flowchart TB
         BR --> CheckMore
         CheckMore -->|Yes| CG
         CheckMore -->|No| KernelGen
-    end
+    END
 
     %% Connect to Synthesis
     MergedCtx --> CG
@@ -103,13 +103,13 @@ flowchart TB
             IntKernel[Integration Kernel]
             DrawKernel[Drawing Kernel]
             UtilKernel[Utility Kernel]
-        end
+        END
 
         subgraph DataModels ["Data Model Rendering"]
             ExpertRender[Expert Functions]
             ForceComp[Force Computation]
             DrawComp[Drawing Computation]
-        end
+        END
 
         SketchRender[render_sketch<br/>Final Assembly]
 
@@ -117,7 +117,7 @@ flowchart TB
         TR --> DataModels
         Kernels --> SketchRender
         DataModels --> SketchRender
-    end
+    END
 
     %% Connect to Rendering
     KernelGen --> TR
@@ -173,7 +173,7 @@ flowchart TB
         BA --> DC
         DC -->|Yes| Components
         DC -->|No| SimplePath
-    end
+    END
 
     %% Connect to Analysis
     BO --> BA
@@ -189,7 +189,7 @@ flowchart TB
         SM --> States
         SPM --> Species
         SPM --> CR
-    end
+    END
 
     %% Connect Analysis to Detection
     Components --> SM
@@ -208,7 +208,7 @@ flowchart TB
         CS --> SuppCtx
         BaseCtx --> MergedCtx
         SuppCtx --> MergedCtx
-    end
+    END
 
     %% Connect to Context
     Components --> CS
@@ -227,7 +227,7 @@ flowchart TB
         BR --> CheckMore
         CheckMore -->|Yes| CG
         CheckMore -->|No| KernelGen
-    end
+    END
 
     %% Connect to Synthesis
     MergedCtx --> CG
@@ -242,13 +242,13 @@ flowchart TB
             IntKernel[Integration Kernel]
             DrawKernel[Drawing Kernel]
             UtilKernel[Utility Kernel]
-        end
+        END
 
         subgraph DataModels ["Data Model Rendering<br/><br/>"]
             ExpertRender[Expert Functions]
             ForceComp[Force Computation]
             DrawComp[Drawing Computation]
-        end
+        END
 
         SketchRender[render_sketch<br/>Final Assembly]
 
@@ -256,7 +256,7 @@ flowchart TB
         TR --> DataModels
         Kernels --> SketchRender
         DataModels --> SketchRender
-    end
+    END
 
     %% Connect to Rendering
     KernelGen --> TR
