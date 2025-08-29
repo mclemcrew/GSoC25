@@ -95,13 +95,6 @@ by MClem (me 🙂)
     </video>
     <div class="video-caption">Slime example</div>
   </div>
-  
-  <div class="video-item">
-    <video controls loop muted>
-      <source src="claude-prompt1-final.mp4" type="video/mp4">
-    </video>
-    <div class="video-caption">Claude's day/night cycle attempt</div>
-  </div>
 </div>
 
 > **Featured Behaviors:** Swarm dynamics • Predator-prey interactions • Resource competition • Temporal state changes • Multi-species ecosystems • Force-based physics • Visual effects (glows, trails) • Artificial life patterns
