@@ -61,7 +61,7 @@ The project underwent a significant architectural transformation from the initia
 ### Final Architecture
 
 ```mermaid
-flowchart TB
+flowchart
     %% Styling
     classDef userNode fill:#e1f5e1,stroke:#4caf50,stroke-width:3px,color:#1b5e20
     classDef orchestratorNode fill:#fff3e0,stroke:#ff9800,stroke-width:2px,color:#e65100
@@ -200,7 +200,7 @@ flowchart TB
 The system employs an intelligent context selection mechanism that optimizes token usage while maintaining generation quality. This two-tier approach ensures that core APIs are always available while supplementary contexts are dynamically selected based on specific behavior requirements.
 
 ```mermaid
-flowchart TB
+flowchart
     %% Styling
     classDef userNode fill:#e1f5e1,stroke:#4caf50,stroke-width:3px,color:#1b5e20
     classDef orchestratorNode fill:#fff3e0,stroke:#ff9800,stroke-width:2px,color:#e65100
