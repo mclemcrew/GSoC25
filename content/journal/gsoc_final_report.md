@@ -489,7 +489,7 @@ _Note: We used gemini-2.0-flash throughout our experimentation. The reason was f
 - T day/night cycle is difficult to tell, but it's operational
 - Species behaviors properly differentiated with colors
 
-[!our-system-prompt1-initial.mp4]
+![[our-system-prompt1-initial.mp4]]
 
 ##### Zero-Shot
 
@@ -514,14 +514,14 @@ _Note: We used gemini-2.0-flash throughout our experimentation. The reason was f
 - ❌ Initial generation failed with this: `taichi.lang.exception.TaichiSyntaxError: Taichi functions cannot be called from Python-scope.`
 
 After refinement:
-[!gemini-prompt1-final.mp4]
+![[gemini-prompt1-final.mp4]]
 
 **Claude Opus (Full Tölvera Context):**
 
 - ❌ Initial generation failed with this: `Name "speed_multiplier" is not defined`
 
 After refinement:
-[!claude-prompt1-final.mp4]
+![[claude-prompt1-final.mp4]]
 
 #### Test Case 2: Food Competition
 
@@ -535,11 +535,11 @@ After refinement:
 
 ##### Initial
 
-[!our-system-prompt2-initial.mp4]
+![[our-system-prompt2-initial.mp4]]
 
 ##### After 1 Refinement
 
-[!our-system-prompt2-1st-refinement.mp4]
+![[our-system-prompt2-1st-refinement.mp4]]
 
 **Gemini 2.5 Pro (With Context):**
 
@@ -549,11 +549,11 @@ After refinement:
 
 ##### Initial
 
-[!gemini-prompt2-initial.mp4]
+![[gemini-prompt2-initial.mp4]]
 
 ##### After 1 Refinement
 
-[!gemini-prompt2-final.mp4]
+![[gemini-prompt2-final.mp4]]
 
 **Claude Opus (With Context):**
 
