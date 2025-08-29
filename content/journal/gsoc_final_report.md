@@ -1,3 +1,12 @@
+---
+title: "GSoC Final Report"
+description: "Final report structure for the Google Summer of Code'25."
+tags:
+  - journal-entry
+  - llm
+  - gsoc
+---
+
 # Google Summer of Code 2025 Final Report: Tölvera LLM Engine
 
 by MClem
