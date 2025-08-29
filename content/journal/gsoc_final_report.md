@@ -19,6 +19,93 @@ by MClem (me 🙂)
 
 **Final Pull Request:** https://github.com/afhverjuekki/tolvera/pull/56
 
+## Gallery of Generated Sketches
+
+<style>
+.video-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin: 30px 0;
+}
+
+.video-item {
+  text-align: center;
+}
+
+.video-item video {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.video-caption {
+  margin-top: 10px;
+  font-size: 0.9em;
+  color: #666;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .video-gallery {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+<div class="video-gallery">
+  <div class="video-item">
+    <video controls loop muted>
+      <source src="our-system-prompt1-initial.mp4" type="video/mp4">
+    </video>
+    <div class="video-caption">Day/Night Cycle: Species chase with time-based behavior</div>
+  </div>
+  
+  <div class="video-item">
+    <video controls loop muted>
+      <source src="our-system-prompt2-initial.mp4" type="video/mp4">
+    </video>
+    <div class="video-caption">Food Competition: Initial generation</div>
+  </div>
+  
+  <div class="video-item">
+    <video controls loop muted>
+      <source src="our-system-prompt2-1st-refinement.mp4" type="video/mp4">
+    </video>
+    <div class="video-caption">Food Competition: After refinement with colors</div>
+  </div>
+  
+  <div class="video-item">
+    <video controls loop muted>
+      <source src="gemini-prompt1-final.mp4" type="video/mp4">
+    </video>
+    <div class="video-caption">Gemini's attempt at day/night cycles</div>
+  </div>
+  
+  <div class="video-item">
+    <video controls loop muted>
+      <source src="gemini-prompt2-initial.mp4" type="video/mp4">
+    </video>
+    <div class="video-caption">Gemini's food competition: Initial</div>
+  </div>
+  
+  <div class="video-item">
+    <video controls loop muted>
+      <source src="gemini-prompt2-final.mp4" type="video/mp4">
+    </video>
+    <div class="video-caption">Gemini's food competition: Refined</div>
+  </div>
+  
+  <div class="video-item">
+    <video controls loop muted>
+      <source src="claude-prompt1-final.mp4" type="video/mp4">
+    </video>
+    <div class="video-caption">Claude's day/night cycle attempt</div>
+  </div>
+</div>
+
+> **Featured Behaviors:** Swarm dynamics • Predator-prey interactions • Resource competition • Temporal state changes • Multi-species ecosystems • Force-based physics • Visual effects (glows, trails) • Artificial life patterns
+
 ## 1. Original Project Goals
 
 This project initially aimed to refine and significantly extend a functional proof-of-concept Natural Language Interface (NLI) for Tölvera, making it accessible to artists and researchers regardless of their coding expertise. The original vision was to create an interactive system that could translate natural language commands into Tölvera sketch generation and modification, acting as a collaborative partner for users exploring artificial life and generative art.
