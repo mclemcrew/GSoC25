@@ -97,8 +97,6 @@ by MClem (me 🙂)
   </div>
 </div>
 
-> **Featured Behaviors:** Swarm dynamics • Predator-prey interactions • Resource competition • Temporal state changes • Multi-species ecosystems • Force-based physics • Visual effects (glows, trails) • Artificial life patterns
-
 ## 1. Original Project Goals
 
 This project initially aimed to refine and significantly extend a functional proof-of-concept Natural Language Interface (NLI) for Tölvera, making it accessible to artists and researchers regardless of their coding expertise. The original vision was to create an interactive system that could translate natural language commands into Tölvera sketch generation and modification, acting as a collaborative partner for users exploring artificial life and generative art.
