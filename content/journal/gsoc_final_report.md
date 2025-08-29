@@ -62,7 +62,6 @@ The project underwent a significant architectural transformation from the initia
 
 ```mermaid
 flowchart TB
-    %% Styling
     classDef userNode fill:#e1f5e1,stroke:#4caf50,stroke-width:3px,color:#1b5e20
     classDef orchestratorNode fill:#fff3e0,stroke:#ff9800,stroke-width:2px,color:#e65100
     classDef analysisNode fill:#e3f2fd,stroke:#2196f3,stroke-width:2px,color:#0d47a1
@@ -70,7 +69,6 @@ flowchart TB
     classDef outputNode fill:#f3e5f5,stroke:#9c27b0,stroke-width:3px,color:#4a148c
     classDef contextNode fill:#fffde7,stroke:#fbc02d,stroke-width:2px,color:#f57f17
 
-    %% Entry Point
     User["User Description<br/>'particles swarm and glow'"]
     UI[Textual UI<br/>tolvera_llm_demo.py]
     BO[BehaviorOrchestrator<br/>Main Controller]
@@ -78,7 +76,6 @@ flowchart TB
     User --> UI
     UI --> BO
 
-    %% Analysis & Decomposition Stage
     subgraph Analysis ["Analysis & Decomposition Stage"]
         BA[BehaviorAnalyzer<br/>Decomposes Complex Behaviors]
         DC{Decomposed<br/>Components?}
@@ -90,10 +87,8 @@ flowchart TB
         DC -->|No| SimplePath
     END
 
-    %% Connect to Analysis
     BO --> BA
 
-    %% Detection & Configuration
     subgraph Detection ["Detection & Configuration"]
         SM[StateManager<br/>Detects Required States]
         SPM[SpeciesManager<br/>Detects Species]
@@ -106,13 +101,11 @@ flowchart TB
         SPM --> CR
     END
 
-    %% Connect Analysis to Detection
     Components --> SM
     Components --> SPM
     SimplePath --> SM
     SimplePath --> SPM
 
-    %% Context Selection
     subgraph Context ["Intelligent Context Selection"]
         CS[ContextSelector<br/>LLM-Powered Selection]
         BaseCtx[Base Context<br/>Core APIs Always Loaded]
@@ -125,11 +118,9 @@ flowchart TB
         SuppCtx --> MergedCtx
     END
 
-    %% Connect to Context
     Components --> CS
     SimplePath --> CS
 
-    %% Synthesis Loop
     subgraph Synthesis ["Expert Synthesis Loop"]
         CG[CodeGenerator<br/>Synthesizes Experts]
         ExpertCode[Expert Functions<br/>@ti.func decorated]
@@ -144,12 +135,10 @@ flowchart TB
         CheckMore -->|No| KernelGen
     END
 
-    %% Connect to Synthesis
     MergedCtx --> CG
     States --> CG
     Species --> CG
 
-    %% Template Rendering - Simplified
     subgraph Rendering ["Template Rendering"]
         TR[TemplateRenderer<br/>Jinja2 Templates]
 
@@ -173,18 +162,15 @@ flowchart TB
         DataModels --> SketchRender
     END
 
-    %% Connect to Rendering
     KernelGen --> TR
     BR -.-> TR
     States -.-> TR
     Species -.-> TR
 
-    %% Final Output - Place at bottom
     SketchRender ==> FinalSketch
 
     FinalSketch[["<br/>Generated Sketch<br/>Complete Python/Taichi Code<br/>Ready to Run"]]
 
-    %% Apply styles
     class User userNode
     class BO orchestratorNode
     class BA,SM,SPM,CR analysisNode
@@ -201,7 +187,6 @@ The system employs an intelligent context selection mechanism that optimizes tok
 
 ```mermaid
 flowchart TB
-    %% Styling
     classDef userNode fill:#e1f5e1,stroke:#4caf50,stroke-width:3px,color:#1b5e20
     classDef orchestratorNode fill:#fff3e0,stroke:#ff9800,stroke-width:2px,color:#e65100
     classDef analysisNode fill:#e3f2fd,stroke:#2196f3,stroke-width:2px,color:#0d47a1
@@ -209,7 +194,6 @@ flowchart TB
     classDef outputNode fill:#f3e5f5,stroke:#9c27b0,stroke-width:3px,color:#4a148c
     classDef contextNode fill:#fffde7,stroke:#fbc02d,stroke-width:2px,color:#f57f17
 
-    %% Entry Point
     User["User Description<br/>'particles swarm and glow'"]
     UI[Textual UI<br/>tolvera_llm_demo.py]
     BO[BehaviorOrchestrator<br/>Main Controller]
@@ -217,7 +201,6 @@ flowchart TB
     User --> UI
     UI --> BO
 
-    %% Analysis & Decomposition Stage
     subgraph Analysis ["Analysis & Decomposition Stage"]
         BA[BehaviorAnalyzer<br/>Decomposes Complex Behaviors]
         DC{Decomposed<br/>Components?}
@@ -229,10 +212,8 @@ flowchart TB
         DC -->|No| SimplePath
     END
 
-    %% Connect to Analysis
     BO --> BA
 
-    %% Detection & Configuration
     subgraph Detection ["Detection & Configuration"]
         SM[StateManager<br/>Detects Required States]
         SPM[SpeciesManager<br/>Detects Species]
@@ -245,13 +226,11 @@ flowchart TB
         SPM --> CR
     END
 
-    %% Connect Analysis to Detection
     Components --> SM
     Components --> SPM
     SimplePath --> SM
     SimplePath --> SPM
 
-    %% Context Selection
     subgraph Context ["Intelligent Context Selection"]
         CS[ContextSelector<br/>LLM-Powered Selection]
         BaseCtx[Base Context<br/>Core APIs Always Loaded]
@@ -264,11 +243,9 @@ flowchart TB
         SuppCtx --> MergedCtx
     END
 
-    %% Connect to Context
     Components --> CS
     SimplePath --> CS
 
-    %% Synthesis Loop
     subgraph Synthesis ["Expert Synthesis Loop"]
         CG[CodeGenerator<br/>Synthesizes Experts]
         ExpertCode[Expert Functions<br/>@ti.func decorated]
@@ -283,12 +260,10 @@ flowchart TB
         CheckMore -->|No| KernelGen
     END
 
-    %% Connect to Synthesis
     MergedCtx --> CG
     States --> CG
     Species --> CG
 
-    %% Template Rendering - Simplified
     subgraph Rendering ["Template Rendering"]
         TR[TemplateRenderer<br/>Jinja2 Templates]
 
@@ -312,18 +287,15 @@ flowchart TB
         DataModels --> SketchRender
     END
 
-    %% Connect to Rendering
     KernelGen --> TR
     BR -.-> TR
     States -.-> TR
     Species -.-> TR
 
-    %% Final Output - Place at bottom
     SketchRender ==> FinalSketch
 
     FinalSketch[["<br/>Generated Sketch<br/>Complete Python/Taichi Code<br/>Ready to Run"]]
 
-    %% Apply styles
     class User userNode
     class BO orchestratorNode
     class BA,SM,SPM,CR analysisNode
