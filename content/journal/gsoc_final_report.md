@@ -56,44 +56,44 @@ by MClem (me 🙂)
 <div class="video-gallery">
   <div class="video-item">
     <video controls loop muted>
-      <source src="our-system-prompt1-initial.mp4" type="video/mp4">
+      <source src="../imgs/particle_motion_repel.mp4" type="video/mp4">
     </video>
-    <div class="video-caption">Day/Night Cycle: Species chase with time-based behavior</div>
+    <div class="video-caption">Two species repel each other while moving across the screen.</div>
   </div>
   
   <div class="video-item">
     <video controls loop muted>
-      <source src="our-system-prompt2-initial.mp4" type="video/mp4">
+      <source src="../imgs/complex_interactions.mp4" type="video/mp4">
     </video>
-    <div class="video-caption">Food Competition: Initial generation</div>
+    <div class="video-caption">Complex self-organizing behavior between three species.</div>
   </div>
   
   <div class="video-item">
     <video controls loop muted>
-      <source src="our-system-prompt2-1st-refinement.mp4" type="video/mp4">
+      <source src="../imgs/boids-osc.mp4" type="video/mp4">
     </video>
-    <div class="video-caption">Food Competition: After refinement with colors</div>
+    <div class="video-caption">Boids with OSC Mapping through Ableton Live</div>
   </div>
   
   <div class="video-item">
     <video controls loop muted>
-      <source src="gemini-prompt1-final.mp4" type="video/mp4">
+      <source src="../imgs/prey_predator_demo.mp4" type="video/mp4">
     </video>
-    <div class="video-caption">Gemini's attempt at day/night cycles</div>
+    <div class="video-caption">Two species compete for food and survival.</div>
   </div>
   
   <div class="video-item">
     <video controls loop muted>
-      <source src="gemini-prompt2-initial.mp4" type="video/mp4">
+      <source src="../imgs/particle-life.mp4" type="video/mp4">
     </video>
-    <div class="video-caption">Gemini's food competition: Initial</div>
+    <div class="video-caption">Particle Life example</div>
   </div>
   
   <div class="video-item">
     <video controls loop muted>
-      <source src="gemini-prompt2-final.mp4" type="video/mp4">
+      <source src="../imgs/slime.mp4" type="video/mp4">
     </video>
-    <div class="video-caption">Gemini's food competition: Refined</div>
+    <div class="video-caption">Slime example</div>
   </div>
   
   <div class="video-item">
