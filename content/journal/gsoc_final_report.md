@@ -451,6 +451,8 @@ Showcases all major features including:
 
 ![[system-screenshot.png]]
 
+[![Tölvera GSoC Demo](https://img.youtube.com/vi/0puPLa05LeY/0.jpg)](https://www.youtube.com/watch?v=0puPLa05LeY)
+
 Provides an accessible interface featuring:
 
 - Type-and-generate workflow with no coding required
@@ -487,7 +489,7 @@ _Note: We used gemini-2.0-flash throughout our experimentation. The reason was f
 - T day/night cycle is difficult to tell, but it's operational
 - Species behaviors properly differentiated with colors
 
-[DEMO VIDEO PLACEHOLDER: Our system successfully generating day/night cycle behavior]
+[!our-system-prompt1-initial]
 
 ##### Zero-Shot
 
@@ -512,12 +514,14 @@ _Note: We used gemini-2.0-flash throughout our experimentation. The reason was f
 - ❌ Initial generation failed with this: `taichi.lang.exception.TaichiSyntaxError: Taichi functions cannot be called from Python-scope.`
 
 After refinement:
+[!gemini-prompt1-final]
 
 **Claude Opus (Full Tölvera Context):**
 
 - ❌ Initial generation failed with this: `Name "speed_multiplier" is not defined`
 
 After refinement:
+[!claude-prompt1-final]
 
 #### Test Case 2: Food Competition
 
@@ -531,7 +535,11 @@ After refinement:
 
 ##### Initial
 
+[!our-system-prompt2-initial]
+
 ##### After 1 Refinement
+
+[!our-system-prompt2-1st-refinement]
 
 **Gemini 2.5 Pro (With Context):**
 
@@ -541,7 +549,11 @@ After refinement:
 
 ##### Initial
 
+[!gemini-prompt2-initial]
+
 ##### After 1 Refinement
+
+[!gemini-prompt2-final]
 
 **Claude Opus (With Context):**
 
