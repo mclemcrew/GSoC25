@@ -79,7 +79,7 @@ flowchart TB
     UI --> BO
 
     %% Analysis & Decomposition Stage
-    subgraph Analysis ["<b>Analysis & Decomposition Stage</b>"]
+    subgraph Analysis ["Analysis & Decomposition Stage"]
         BA[BehaviorAnalyzer<br/>Decomposes Complex Behaviors]
         DC{Decomposed<br/>Components?}
         Components[Component List<br/>- Force behaviors<br/>- Visual effects<br/>- State updates]
@@ -94,7 +94,7 @@ flowchart TB
     BO --> BA
 
     %% Detection & Configuration
-    subgraph Detection ["<b>Detection & Configuration</b>"]
+    subgraph Detection ["Detection & Configuration"]
         SM[StateManager<br/>Detects Required States]
         SPM[SpeciesManager<br/>Detects Species]
         CR[ColorResolver<br/>Maps Colors to RGBA]
@@ -113,7 +113,7 @@ flowchart TB
     SimplePath --> SPM
 
     %% Context Selection
-    subgraph Context ["<b>Intelligent Context Selection</b>"]
+    subgraph Context ["Intelligent Context Selection"]
         CS[ContextSelector<br/>LLM-Powered Selection]
         BaseCtx[Base Context<br/>Core APIs Always Loaded]
         SuppCtx[Supplementary Context<br/>Dynamically Selected Patterns]
@@ -130,7 +130,7 @@ flowchart TB
     SimplePath --> CS
 
     %% Synthesis Loop
-    subgraph Synthesis ["<b>Expert Synthesis Loop</b>"]
+    subgraph Synthesis ["Expert Synthesis Loop"]
         CG[CodeGenerator<br/>Synthesizes Experts]
         ExpertCode[Expert Functions<br/>@ti.func decorated]
         BR[BehaviorRegistry<br/>Stores & Manages Experts]
@@ -150,7 +150,7 @@ flowchart TB
     Species --> CG
 
     %% Template Rendering - Simplified
-    subgraph Rendering ["<b>Template Rendering</b>"]
+    subgraph Rendering ["Template Rendering"]
         TR[TemplateRenderer<br/>Jinja2 Templates]
 
         subgraph Kernels ["Kernel Generation<br/><br/>"]
@@ -182,7 +182,146 @@ flowchart TB
     %% Final Output - Place at bottom
     SketchRender ==> FinalSketch
 
-    FinalSketch[["Generated Sketch<br/>Complete Python/Taichi Code<br/>Ready to Run"]]
+    FinalSketch[["<br/>Generated Sketch<br/>Complete Python/Taichi Code<br/>Ready to Run"]]
+
+    %% Apply styles
+    class User userNode
+    class BO orchestratorNode
+    class BA,SM,SPM,CR analysisNode
+    class CS,BaseCtx,SuppCtx,MergedCtx contextNode
+    class CG,BR,ExpertCode,CheckMore,KernelGen synthNode
+    class TR,IntKernel,DrawKernel,UtilKernel,ExpertRender,ForceComp,DrawComp,SketchRender synthNode
+    class FinalSketch outputNode
+    class States,Species outputNode
+```
+
+### Context Selection Architecture
+
+The system employs an intelligent context selection mechanism that optimizes token usage while maintaining generation quality. This two-tier approach ensures that core APIs are always available while supplementary contexts are dynamically selected based on specific behavior requirements.
+
+```mermaid
+flowchart TB
+    %% Styling
+    classDef userNode fill:#e1f5e1,stroke:#4caf50,stroke-width:3px,color:#1b5e20
+    classDef orchestratorNode fill:#fff3e0,stroke:#ff9800,stroke-width:2px,color:#e65100
+    classDef analysisNode fill:#e3f2fd,stroke:#2196f3,stroke-width:2px,color:#0d47a1
+    classDef synthNode fill:#fce4ec,stroke:#e91e63,stroke-width:2px,color:#880e4f
+    classDef outputNode fill:#f3e5f5,stroke:#9c27b0,stroke-width:3px,color:#4a148c
+    classDef contextNode fill:#fffde7,stroke:#fbc02d,stroke-width:2px,color:#f57f17
+
+    %% Entry Point
+    User["User Description<br/>'particles swarm and glow'"]
+    UI[Textual UI<br/>tolvera_llm_demo.py]
+    BO[BehaviorOrchestrator<br/>Main Controller]
+
+    User --> UI
+    UI --> BO
+
+    %% Analysis & Decomposition Stage
+    subgraph Analysis ["Analysis & Decomposition Stage"]
+        BA[BehaviorAnalyzer<br/>Decomposes Complex Behaviors]
+        DC{Decomposed<br/>Components?}
+        Components[Component List<br/>- Force behaviors<br/>- Visual effects<br/>- State updates]
+        SimplePath[Single Behavior]
+
+        BA --> DC
+        DC -->|Yes| Components
+        DC -->|No| SimplePath
+    end
+
+    %% Connect to Analysis
+    BO --> BA
+
+    %% Detection & Configuration
+    subgraph Detection ["Detection & Configuration"]
+        SM[StateManager<br/>Detects Required States]
+        SPM[SpeciesManager<br/>Detects Species]
+        CR[ColorResolver<br/>Maps Colors to RGBA]
+        States[Custom States<br/>- Global<br/>- Particle<br/>- Species]
+        Species[Species Config<br/>- IDs & Names<br/>- Colors<br/>- Interactions]
+
+        SM --> States
+        SPM --> Species
+        SPM --> CR
+    end
+
+    %% Connect Analysis to Detection
+    Components --> SM
+    Components --> SPM
+    SimplePath --> SM
+    SimplePath --> SPM
+
+    %% Context Selection
+    subgraph Context ["Intelligent Context Selection"]
+        CS[ContextSelector<br/>LLM-Powered Selection]
+        BaseCtx[Base Context<br/>Core APIs Always Loaded]
+        SuppCtx[Supplementary Context<br/>Dynamically Selected Patterns]
+        MergedCtx[Merged Context]
+
+        CS --> BaseCtx
+        CS --> SuppCtx
+        BaseCtx --> MergedCtx
+        SuppCtx --> MergedCtx
+    end
+
+    %% Connect to Context
+    Components --> CS
+    SimplePath --> CS
+
+    %% Synthesis Loop
+    subgraph Synthesis ["Expert Synthesis Loop"]
+        CG[CodeGenerator<br/>Synthesizes Experts]
+        ExpertCode[Expert Functions<br/>@ti.func decorated]
+        BR[BehaviorRegistry<br/>Stores & Manages Experts]
+        CheckMore{More<br/>Components?}
+        KernelGen[Generate Kernels]
+
+        CG --> ExpertCode
+        ExpertCode --> BR
+        BR --> CheckMore
+        CheckMore -->|Yes| CG
+        CheckMore -->|No| KernelGen
+    end
+
+    %% Connect to Synthesis
+    MergedCtx --> CG
+    States --> CG
+    Species --> CG
+
+    %% Template Rendering - Simplified
+    subgraph Rendering ["Template Rendering"]
+        TR[TemplateRenderer<br/>Jinja2 Templates]
+
+        subgraph Kernels ["Kernel Generation<br/><br/>"]
+            IntKernel[Integration Kernel]
+            DrawKernel[Drawing Kernel]
+            UtilKernel[Utility Kernel]
+        end
+
+        subgraph DataModels ["Data Model Rendering<br/><br/>"]
+            ExpertRender[Expert Functions]
+            ForceComp[Force Computation]
+            DrawComp[Drawing Computation]
+        end
+
+        SketchRender[render_sketch<br/>Final Assembly]
+
+        TR --> Kernels
+        TR --> DataModels
+        Kernels --> SketchRender
+        DataModels --> SketchRender
+    end
+
+    %% Connect to Rendering
+    KernelGen --> TR
+    BR -.-> TR
+    States -.-> TR
+    Species -.-> TR
+
+    %% Final Output - Place at bottom
+    SketchRender ==> FinalSketch
+
+    FinalSketch[["<br/>Generated Sketch<br/>Complete Python/Taichi Code<br/>Ready to Run"]]
 
     %% Apply styles
     class User userNode
