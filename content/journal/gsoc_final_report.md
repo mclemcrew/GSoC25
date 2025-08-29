@@ -178,7 +178,8 @@ flowchart TB
     class CG,BR,ExpertCode,CheckMore,KernelGen synthNode
     class TR,IntKernel,DrawKernel,UtilKernel,ExpertRender,ForceComp,DrawComp,SketchRender synthNode
     class FinalSketch outputNode
-    class States,Species outputNode
+    class States outputNode
+    class Species outputNode
 ```
 
 ### Context Selection Architecture
@@ -303,7 +304,8 @@ flowchart TB
     class CG,BR,ExpertCode,CheckMore,KernelGen synthNode
     class TR,IntKernel,DrawKernel,UtilKernel,ExpertRender,ForceComp,DrawComp,SketchRender synthNode
     class FinalSketch outputNode
-    class States,Species outputNode
+    class States outputNode
+    class Species outputNode
 ```
 
 ### Core Components Implemented
