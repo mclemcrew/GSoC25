@@ -79,7 +79,7 @@ flowchart TB
     UI --> BO
 
     %% Analysis & Decomposition Stage
-    subgraph Analysis ["<br/>Analysis & Decomposition Stage"]
+    subgraph Analysis ["<b>Analysis & Decomposition Stage</b>"]
         BA[BehaviorAnalyzer<br/>Decomposes Complex Behaviors]
         DC{Decomposed<br/>Components?}
         Components[Component List<br/>- Force behaviors<br/>- Visual effects<br/>- State updates]
@@ -94,7 +94,7 @@ flowchart TB
     BO --> BA
 
     %% Detection & Configuration
-    subgraph Detection ["<br/>Detection & Configuration"]
+    subgraph Detection ["<b>Detection & Configuration</b>"]
         SM[StateManager<br/>Detects Required States]
         SPM[SpeciesManager<br/>Detects Species]
         CR[ColorResolver<br/>Maps Colors to RGBA]
@@ -113,7 +113,7 @@ flowchart TB
     SimplePath --> SPM
 
     %% Context Selection
-    subgraph Context ["<br/>Intelligent Context Selection"]
+    subgraph Context ["<b>Intelligent Context Selection</b>"]
         CS[ContextSelector<br/>LLM-Powered Selection]
         BaseCtx[Base Context<br/>Core APIs Always Loaded]
         SuppCtx[Supplementary Context<br/>Dynamically Selected Patterns]
@@ -130,7 +130,7 @@ flowchart TB
     SimplePath --> CS
 
     %% Synthesis Loop
-    subgraph Synthesis ["<br/>Expert Synthesis Loop"]
+    subgraph Synthesis ["<b>Expert Synthesis Loop</b>"]
         CG[CodeGenerator<br/>Synthesizes Experts]
         ExpertCode[Expert Functions<br/>@ti.func decorated]
         BR[BehaviorRegistry<br/>Stores & Manages Experts]
@@ -150,16 +150,16 @@ flowchart TB
     Species --> CG
 
     %% Template Rendering - Simplified
-    subgraph Rendering ["<br/>Template Rendering"]
+    subgraph Rendering ["<b>Template Rendering</b>"]
         TR[TemplateRenderer<br/>Jinja2 Templates]
 
-        subgraph Kernels ["Kernel Generation"]
+        subgraph Kernels ["Kernel Generation<br/><br/>"]
             IntKernel[Integration Kernel]
             DrawKernel[Drawing Kernel]
             UtilKernel[Utility Kernel]
         end
 
-        subgraph DataModels ["Data Model Rendering"]
+        subgraph DataModels ["Data Model Rendering<br/><br/>"]
             ExpertRender[Expert Functions]
             ForceComp[Force Computation]
             DrawComp[Drawing Computation]
@@ -182,7 +182,7 @@ flowchart TB
     %% Final Output - Place at bottom
     SketchRender ==> FinalSketch
 
-    FinalSketch[["<br/>Generated Sketch<br/>Complete Python/Taichi Code<br/>Ready to Run"]]
+    FinalSketch[["Generated Sketch<br/>Complete Python/Taichi Code<br/>Ready to Run"]]
 
     %% Apply styles
     class User userNode
