@@ -85,7 +85,7 @@ flowchart TB
         BA --> DC
         DC -->|Yes| Components
         DC -->|No| SimplePath
-    END
+    end
 
     BO --> BA
 
@@ -99,7 +99,7 @@ flowchart TB
         SM --> States
         SPM --> Species
         SPM --> CR
-    END
+    end
 
     Components --> SM
     Components --> SPM
@@ -116,7 +116,7 @@ flowchart TB
         CS --> SuppCtx
         BaseCtx --> MergedCtx
         SuppCtx --> MergedCtx
-    END
+    end
 
     Components --> CS
     SimplePath --> CS
@@ -133,7 +133,7 @@ flowchart TB
         BR --> CheckMore
         CheckMore -->|Yes| CG
         CheckMore -->|No| KernelGen
-    END
+    end
 
     MergedCtx --> CG
     States --> CG
@@ -146,13 +146,13 @@ flowchart TB
             IntKernel[Integration Kernel]
             DrawKernel[Drawing Kernel]
             UtilKernel[Utility Kernel]
-        END
+        end
 
         subgraph DataModels ["Data Model Rendering<br/><br/>"]
             ExpertRender[Expert Functions]
             ForceComp[Force Computation]
             DrawComp[Drawing Computation]
-        END
+        end
 
         SketchRender[render_sketch<br/>Final Assembly]
 
@@ -160,7 +160,7 @@ flowchart TB
         TR --> DataModels
         Kernels --> SketchRender
         DataModels --> SketchRender
-    END
+    end
 
     KernelGen --> TR
     BR -.-> TR
@@ -211,7 +211,7 @@ flowchart TB
         BA --> DC
         DC -->|Yes| Components
         DC -->|No| SimplePath
-    END
+    end
 
     BO --> BA
 
@@ -225,7 +225,7 @@ flowchart TB
         SM --> States
         SPM --> Species
         SPM --> CR
-    END
+    end
 
     Components --> SM
     Components --> SPM
@@ -242,7 +242,7 @@ flowchart TB
         CS --> SuppCtx
         BaseCtx --> MergedCtx
         SuppCtx --> MergedCtx
-    END
+    end
 
     Components --> CS
     SimplePath --> CS
@@ -259,7 +259,7 @@ flowchart TB
         BR --> CheckMore
         CheckMore -->|Yes| CG
         CheckMore -->|No| KernelGen
-    END
+    end
 
     MergedCtx --> CG
     States --> CG
@@ -272,13 +272,13 @@ flowchart TB
             IntKernel[Integration Kernel]
             DrawKernel[Drawing Kernel]
             UtilKernel[Utility Kernel]
-        END
+        end
 
         subgraph DataModels ["Data Model Rendering<br/><br/>"]
             ExpertRender[Expert Functions]
             ForceComp[Force Computation]
             DrawComp[Drawing Computation]
-        END
+        end
 
         SketchRender[render_sketch<br/>Final Assembly]
 
@@ -286,7 +286,7 @@ flowchart TB
         TR --> DataModels
         Kernels --> SketchRender
         DataModels --> SketchRender
-    END
+    end
 
     KernelGen --> TR
     BR -.-> TR
