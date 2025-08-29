@@ -9,19 +9,19 @@ tags:
 
 # Google Summer of Code 2025 Final Report: Tölvera LLM Engine
 
-by MClem
+by MClem (me 🙂)
 
 **Project:** Enhancing Creative Workflows with a Natural Language Interface for Tölvera
 
 **Organization:** Tölvera
 
-**Mentors:** jarm, victor-shepardson, Peter Wallace
+**Mentors:** [Jack](https://github.com/jarmitage), [Victor](https://github.com/victor-shepardson), and [Peter]()
 
 **Final Pull Request:** https://github.com/afhverjuekki/tolvera/pull/56
 
-## 1. Project Goals
+## 1. Original Project Goals
 
-This project aimed to refine and significantly extend a functional proof-of-concept Natural Language Interface (NLI) for Tölvera, making it accessible to artists and researchers regardless of their coding expertise. The original vision was to create an interactive system that could translate natural language commands into Tölvera sketch generation and modification, acting as a collaborative partner for users exploring artificial life and generative art.
+This project initially aimed to refine and significantly extend a functional proof-of-concept Natural Language Interface (NLI) for Tölvera, making it accessible to artists and researchers regardless of their coding expertise. The original vision was to create an interactive system that could translate natural language commands into Tölvera sketch generation and modification, acting as a collaborative partner for users exploring artificial life and generative art.
 
 The core objectives included:
 
@@ -30,7 +30,7 @@ The core objectives included:
 - Creating an intuitive interface that minimizes technical barriers while maintaining full transparency into the generation process
 - Ensuring user privacy through local model support via Ollama alongside cloud providers
 
-## 2. What I Accomplished
+## 2. What I Accomplished (What actually happened)
 
 ### Architectural Evolution
 
@@ -44,19 +44,19 @@ The project underwent a significant architectural transformation from the initia
 
 **[[week5|Week 5]]:** Pivoted to the Product of Programmatic Experts (PoE) system - a force-based approach where small expert functions are synthesized and composed dynamically. This solved the Taichi compilation issues and allowed for composability.
 
-**[[week6|Week 6]]:** Added inter-particle interactions, automated error correction, and a kernel accumulator for preserving generated code. The system could now handle behaviors like "particles repel each other."
+**[[week6|Week 6]]:** Added inter-particle interactions, automated error correction, and a kernel accumulator for preserving generated code. The system could now handle behaviors like "_particles repel each other._"
 
 **[[week7|Week 7]]:** Implemented behavior decomposition for complex descriptions, intelligent species management, and boundary behaviors. This allowed handling descriptions like "_fish school together and avoid predators_."
 
 **[[week8|Week 8]]:** Built dynamic state generation system that automatically creates required states from behavior descriptions, paired with Jinja2 templates for structuring the final sketch assembly.
 
-**[[week9|Week 9]]:** Expanded beyond force-based behaviors to support artificial life patterns including cellular automata, slime molds, and multi-phase systems. Created new expert types for state transitions.
+**[[week9|Week 9]]:** Expanded beyond force-based behaviors to support alife patterns including cellular automata, slime molds, and multi-phase systems. Created new expert types (visual/drawing, utility, interaction) for state transitions.
 
-**[[week10|Week 10]]:** Shifted to direct synthesis for expert functions using Gemini 2.0 Flash with detailed physics-aware prompts, while maintaining Jinja2 templates for final sketch organization. Built full tracing system for debugging.
+**[[week10|Week 10]]:** Shifted to direct synthesis for expert functions using Gemini 2.0 Flash with detailed Tölvera and Taichi-aware prompts, while maintaining Jinja2 templates for final sketch organization. Built full tracing system for debugging.
 
-**[[week11|Week 11]]:** Created the full Textual UI with real-time sketch generation, natural language refinement with diff highlighting, and an interactive tutorial system.
+**[[week11|Week 11]]:** Created the full Textual UI with sketch generation, natural language refinement with diff highlighting, and a tutorial system.
 
-**[[week12|Week 12]]:** Added automatic error recovery through a repair button, conversation memory for maintaining context, and two-step refinement process. Created [demo video](https://www.youtube.com/watch?v=0puPLa05LeY) showcasing the complete Natural Language Interface.
+**[[week12|Week 12]]:** Added automatic error recovery through a repair button, conversation memory for maintaining context, and two-step refinement process. Created a [demo video](https://www.youtube.com/watch?v=0puPLa05LeY) showcasing the complete Natural Language Interface.
 
 ### Final Architecture
 
@@ -184,7 +184,7 @@ flowchart TB
 
 ### Context Selection Architecture
 
-The system employs an intelligent context selection mechanism that optimizes token usage while maintaining generation quality. This two-tier approach ensures that core APIs are always available while supplementary contexts are dynamically selected based on specific behavior requirements.
+The system uses an intelligent context selection mechanism that optimizes token usage while maintaining generation quality. This two-tier approach allows core APIs to always be injected into the context window while supplementary contexts are dynamically selected based on specific behavior requirements. Think RAG, but a very simple implementation.
 
 ```mermaid
 flowchart TB
@@ -315,12 +315,12 @@ flowchart TB
 - **BehaviorOrchestrator**: Central coordinator managing the entire synthesis workflow, delegates to specialized components
 - **BehaviorAnalyzer**: Decomposes complex behavior descriptions into implementable components using pattern matching and LLM analysis
 - **CodeGenerator**: Synthesizes Taichi expert functions through direct LLM generation with physics-aware prompts
-- **StateManager**: Dynamically creates and manages custom particle and global states based on behavior requirements
+- **StateManager**: Dynamically creates and manages custom particle, pixels, and global states based on behavior requirements
 - **SpeciesManager**: Detects species mentions in descriptions and manages configurations
 
 **Context and Generation:**
 
-- **ContextAwarePromptBuilder**: Constructs prompts with relevant physics rules, Taichi constraints, and behavior patterns from context library
+- **ContextAwarePromptBuilder**: Constructs prompts with relevant Tölvera rules, Taichi constraints, and behavior patterns from context library
 - **TemplateRenderer**: Uses Jinja2 templates to assemble generated expert functions and kernels into complete, executable sketches
 - **SketchRefiner**: Applies architectural patterns and corrections using a two-step analysis and implementation process
 
@@ -328,33 +328,31 @@ flowchart TB
 
 - **Comprehensive Tracing System**: Captures every LLM call, prompt, response, and timing metric
 - **Console Tracer**: Real-time colored output showing synthesis progress
-- **HTML Report Generator**: Interactive reports with timeline visualization and collapsible sections
+- **HTML Report Generator**: Interactive reports with timeline visualization and accordion sections for showing the full prompt call and response
 - **Mermaid Diagram Generator**: Visual flow diagrams of the synthesis process
 
 ### Key Features Implemented
 
 **1. Product of Programmatic Experts (PoE) Architecture**
 
-The breakthrough came in [[week5|Week 5]] when we pivoted from rigid MoE to the PoE system. Instead of monolithic scripts, the system synthesizes small `@ti.func` expert functions that calculate specific forces. This solved the critical "Cannot find source code for object" Taichi compilation error through a two-step synthesis process: first generating experts, then regenerating the integration kernel with all experts included in the source.
+The breakthrough came in [[week5|Week 5]] when we pivoted from the farily rigid MoE to the PoE system. Instead of monolithic scripts, the system synthesizes small `@ti.func` expert functions that calculate specific forces. This solved several Taichi compilation errors through a two-step synthesis process: first generating experts individually, then regenerating the integration kernel with all experts are included.
 
 **2. Dynamic State Generation**
 
-Developed in [[week8|Week 8]], the system automatically analyzes behavior descriptions to identify required states. The StateManager detects when behaviors need custom states (like `time_of_day` for day/night cycles) and creates them with proper Taichi types and initialization patterns.
+Developed in [[week8|Week 8]], the system automatically analyzes behavior descriptions to identify required states. The StateManager detects when behaviors need custom states (like `time_of_day` for day/night cycles) and creates them with Taichi types and initialization patterns.
 
 **3. Behavior Decomposition and Species Management**
 
-[[week7|Week 7]] introduced the BehaviorAnalyzer which breaks complex descriptions into atomic components. It uses heuristic analysis to detect complexity indicators (conjunctions, conditionals, multiple species) and LLM-assisted decomposition for borderline cases. The SpeciesManager analyzes descriptions to detect species mentions, extract relationships, and generate species-aware initialization patterns.
+[[week7|Week 7]] introduced the BehaviorAnalyzer (was Decomposer if you look through some of the older code) which breaks complex descriptions into atomic components. It uses LLM-assisted decomposition for the decomposition. The SpeciesManager analyzes descriptions to detect species mentions, extract relationships, and generate species-aware initialization patterns.
 
 **4. Interactive Textual UI**
 
 Built in [[week11|Week 11]], the terminal UI provides:
 
-- Real-time sketch generation with syntax highlighting
+- Sketch generation with syntax highlighting
 - Natural language refinement with diff highlighting showing exactly what changed
 - Interactive tutorial system with 8-step walkthrough
 - Model selection across providers (Gemini, Claude, OpenAI)
-- Process isolation for stable sketch execution
-- Bioluminescent deep-sea aesthetic with marine-themed status messages
 
 **5. Error Recovery and Self-Healing ([[week12|Week 12]])**
 
@@ -367,7 +365,7 @@ The system includes automatic error recovery through:
 
 ### Example: Working Generated Expert
 
-Here's an actual expert function generated by the system from the description "particles are attracted to the center of the screen":
+Here's an expert function generated by the system from the description "_particles are attracted to the center of the screen_":
 
 ```python
 @ti.func
@@ -391,7 +389,7 @@ def expert_attract_to_center(pos: ti.math.vec2, vel: ti.math.vec2, mass: ti.f32,
     return force
 ```
 
-This demonstrates key aspects of the synthesis:
+This demonstrates some key aspects of the synthesis:
 
 - Proper function signature with all required parameters
 - Physics-aware calculations (mass scaling, singularity avoidance)
@@ -400,49 +398,39 @@ This demonstrates key aspects of the synthesis:
 
 ### Performance Metrics
 
-Based on extensive testing with Gemini 2.0 Flash:
-
-**Synthesis Times:**
-
-- Simple behaviors: ~2-3 seconds
-- Complex decomposition: ~5-8 seconds
-- Complete sketch generation: ~10-15 seconds total
-- Token usage: 2k-5k input, 1k-3k output per call
+I've tested this a lot and these are crude measurements, but they are realistic success rates depending on how complex of a statement you initially test with the system:
 
 **Success Rates (Based on Testing):**
 
 - Basic physics (gravity, random movement): ~85%
 - Simple interactions (chase, flee): ~70%
-- Species detection: ~60%
+- Species detection: ~80%
 - Complex multi-component behaviors: ~40%
 - Cellular automata and a-life patterns: ~30%
 - Everything working together end-to-end: ~20%
 
 ## 3. The Current State of the Project
 
-### Key Milestones and Demonstrations
+### Milestones and Demos
 
-Throughout the 12-week development period, the system achieved several key milestones:
+Throughout the 12-week dev period, we hit the following milestones:
 
 - **[[week5|Week 5]]:** First successful PoE synthesis - gravity, attraction to center, movement patterns
 - **[[week6|Week 6]]:** Inter-particle interactions - repulsion, chasing, flocking behaviors
-- **[[week7|Week 7]]:** Complex decomposed behaviors - "particles migrate to center but repel when close"
+- **[[week7|Week 7]]:** Complex decomposed behaviors - _"particles migrate to center but repel when close"_
 - **[[week8|Week 8]]:** Temporal states - day/night cycles with behavior changes
-- **[[week9|Week 9]]:** Artificial life patterns - Conway's Game of Life, slime molds, boids
+- **[[week9|Week 9]]:** Artificial life patterns - slime molds, boids
 - **[[week12|Week 12]]:** [GSoC Demo Video](https://www.youtube.com/watch?v=0puPLa05LeY) - Complete walkthrough of the Natural Language Interface
 
 ### Video Demonstration
 
-The [demo video](https://www.youtube.com/watch?v=0puPLa05LeY) provides a comprehensive walkthrough of the Natural Language Interface for Tölvera, demonstrating:
+The [demo video](https://www.youtube.com/watch?v=0puPLa05LeY) provides a walkthrough of the Natural Language Interface for Tölvera, demonstrating:
 
 - **Live Synthesis**: Real-time generation of particle behaviors from natural language descriptions
 - **Textual UI in Action**: The complete terminal interface with syntax highlighting and live preview
 - **Error Recovery**: How the system handles and recovers from synthesis failures
 - **Refinement Process**: Natural language refinement with visual diff tracking
-- **Complex Behaviors**: Multi-species ecosystems and artificial life patterns
 - **End-to-End Workflow**: From typing a description to running the generated simulation
-
-Watch as the system transforms descriptions like "red predators chase blue prey" into fully functional GPU-accelerated particle simulations, all through natural language interaction.
 
 ### Current Capabilities
 
@@ -461,6 +449,8 @@ Showcases all major features including:
 
 ### Textual User Interface (`tolvera_textual_ui.py`)
 
+![[system-screenshot.png]]
+
 Provides an accessible interface featuring:
 
 - Type-and-generate workflow with no coding required
@@ -474,21 +464,18 @@ Provides an accessible interface featuring:
 
 Each synthesis produces:
 
-- Complete Python sketches with all necessary imports and setup
-- Integration kernels combining multiple expert functions
-- State initialization and temporal update code
+- Complete Tölvera sketch
 - HTML trace reports for debugging
-- Mermaid flow diagrams of the synthesis process
-
-See the [GSoC Demo Video](https://www.youtube.com/watch?v=0puPLa05LeY) for a walkthrough of the workflow from natural language description to running simulation.
-
-[SCREENSHOT PLACEHOLDER: Textual UI showing code generation with syntax highlighting]
 
 ## 4. Challenges & Lessons Learned
 
-### Comparative Analysis: Our System vs. Frontier Models
+### Bittersweet Analysis: Our System vs. Frontier Models
 
-To understand the challenges of code generation for specialized frameworks, we compared our system against frontier models (Gemini 2.5 Pro and Claude Opus) using identical prompts. The results revealed fundamental differences in approach and success rates.
+To help determine if any of this was really worth it, we ran a bittersweet test where we put our system up against the top frontier models to see if our overly complex engineering of Tölvera and Taichi syntax and custom curating was actually worth it.
+
+We compared our system against frontier models (Gemini 2.5 Pro and Claude Opus) using identical prompts. The results showed that there is merit in our approach and it performs exceptionally better when compared with zero-shot prompting and moderately more successfully if you feed the entire Tölvera codebase into the context window for Gemini and Claude.
+
+_Note: We used gemini-2.0-flash throughout our experimentation. The reason was for 1. inference time and 2. price. The model we were using was a lot worse in benchmarks regarding coding and general reasoning ability and thus should've underperformed the better foundational models if our pipeline orchestration approach was not useful._
 
 #### Test Case 1: Day/Night Cycle Behavior
 
@@ -496,28 +483,41 @@ To understand the challenges of code generation for specialized frameworks, we c
 
 **Our System:**
 
-- ✅ Works on first attempt
-- Correctly implements day/night cycle with temporal states
-- Species behaviors properly differentiated
-- Success Rate: ~75%
+- Worked on first attempt
+- T day/night cycle is difficult to tell, but it's operational
+- Species behaviors properly differentiated with colors
 
 [DEMO VIDEO PLACEHOLDER: Our system successfully generating day/night cycle behavior]
 
+##### Zero-Shot
+
 **Gemini 2.5 Pro (Zero-Shot):**
 
-- ❌ `TypeError: Particles.__init__() takes 2 positional arguments but 3 were given`
+- ❌ Initial generation failed with this: `TypeError: Particles.__init__() takes 2 positional arguments but 3 were given`
 - ❌ After refinement: `AttributeError: 'int' object has no attribute 'pn'`
 - ❌ After 2nd refinement: `AttributeError: 'Particles' object has no attribute 's'`
 - Never successfully runs despite multiple attempts
 
 **Claude Opus (Zero-Shot):**
 
-- ❌ `ImportError: cannot import name 'ui' from 'tolvera'`
+- ❌ Initial generation failed with this: `ImportError: cannot import name 'ui' from 'tolvera'`
 - ❌ After refinement: `ModuleNotFoundError: No module named 'tolvera.ui'`
 - ❌ After 2nd refinement: `ModuleNotFoundError: No module named 'imgui'`
 - Fundamentally misunderstands Tölvera's API structure
 
-[DEMO VIDEO PLACEHOLDER: Frontier models failing with various errors]
+##### Full Tölvera Repo Loaded into the Context Window
+
+**Gemini 2.5 Pro (Full Tölvera Context):**
+
+- ❌ Initial generation failed with this: `taichi.lang.exception.TaichiSyntaxError: Taichi functions cannot be called from Python-scope.`
+
+After refinement:
+
+**Claude Opus (Full Tölvera Context):**
+
+- ❌ Initial generation failed with this: `Name "speed_multiplier" is not defined`
+
+After refinement:
 
 #### Test Case 2: Food Competition
 
@@ -525,12 +525,13 @@ To understand the challenges of code generation for specialized frameworks, we c
 
 **Our System:**
 
--  Works, though initial version lacks colors
--  After one refinement: correct colors and competition mechanics
--  Food particles properly consumed over time
-- Success Rate: ~65%
+- Works, though initial version lacks colors
+- After one refinement: correct colors and competition mechanics
+- Food particles properly consumed over time
 
-[DEMO VIDEO PLACEHOLDER: Our system generating food competition with proper mechanics]
+##### Initial
+
+##### After 1 Refinement
 
 **Gemini 2.5 Pro (With Context):**
 
@@ -538,14 +539,16 @@ To understand the challenges of code generation for specialized frameworks, we c
 - After refinement: food particles attracted to species instead of being consumed
 - Fundamentally misunderstands the intended behavior
 
+##### Initial
+
+##### After 1 Refinement
+
 **Claude Opus (With Context):**
 
 - ❌ `TaichiSyntaxError: Taichi functions cannot be called from Python-scope`
 - ❌ After refinement: Same error plus segmentation fault
 - ❌ Never successfully runs
 - Critical misunderstanding of Taichi's execution model
-
-[DEMO VIDEO PLACEHOLDER: Comparison of all three systems on same prompt]
 
 ### Key Insights from Comparative Analysis
 
@@ -556,14 +559,12 @@ Frontier models, despite their general capabilities, lack understanding of:
 - Tölvera's specific API structure
 - Taichi's GPU kernel constraints
 - The distinction between Python-scope and Taichi-scope execution
-- Particle system conventions and physics
 
 **2. Structured Context Beats Raw Intelligence**
 
 Our system's success comes from:
 
-- Carefully curated context about Tölvera and Taichi
-- Physics conventions explicitly encoded in prompts
+- Curated context about Tölvera and Taichi
 - Common error patterns pre-identified and avoided
 - Structured output forcing valid code generation
 
@@ -580,7 +581,7 @@ While frontier models attempt to generate code from first principles, our specia
 
 **1. The Taichi Compilation Error (Week 5)**
 
-The breakthrough challenge came when dynamically generated `@ti.kernel` functions couldn't be located by Taichi's compiler, resulting in "Cannot find source code for object" errors. The solution involved a two-step synthesis process: first generating `@ti.func` experts, then regenerating the entire integration kernel, with the complete code compiled and cached in Python's linecache.
+The challenge came when dynamically generated `@ti.kernel` functions couldn't be located by Taichi's compiler, resulting in _"Cannot find source code for object"_ errors. The solution involved a two-step synthesis process: first generating `@ti.func` experts, then regenerating the entire integration kernel, with the complete code compiled and cached in Python's linecache.
 
 **2. Taichi Constraint Violations**
 
@@ -592,7 +593,7 @@ The most common crash ("Return inside non-static if") affected even frontier mod
 if species == 0:
     return predator_force()  # CRASH!
 
-✅ CORRECT:
+✅ CORRECT:
 force = ti.math.vec2(0.0, 0.0)  # Declare first
 if species == 0:
     force = predator_force()  # Modify
@@ -603,15 +604,15 @@ This constraint alone caused approximately 40% of initial generation failures ac
 
 **2. State Consistency**
 
-Managing state names across different synthesis stages proved challenging. The LLM would often generate different names for the same state in expert functions versus integration kernels. The solution involved validation and automatic correction of state references.
+Managing state names across different synthesis stages proved challenging. The LLM would often generate different names for the same state in expert functions versus integration kernels. The solution involved validation and context engineering to resolve. Also the more parameters in the model, the less it hallucinated these overall.
 
 **3. Context Management**
 
-The initial keyword-based context selection was too simplistic. Complex behaviors required multiple context modules, but including too much context degraded generation quality. Finding the right balance remained an ongoing challenge.
+The initial keyword-based context selection was too simplistic. Complex behaviors required multiple context modules, but including too much context degraded generation quality. Finding the right balance remains an ongoing challenge.
 
 ### Architectural Evolution Through Iterative Development
 
-The project's 12-week journey reveals crucial insights about LLM-based code generation:
+The project's 12-week journey essentially summed up a lot of the problems you'd find in the literature regarding LLM-based code generation for DSL:
 
 **Weeks 1-4: Finding the Right Abstraction**
 
@@ -635,28 +636,9 @@ The project's 12-week journey reveals crucial insights about LLM-based code gene
 - [[week11|Week 11]]: Full Textual UI for accessibility
 - [[week12|Week 12]]: Self-healing with repair button and memory
 
-This evolution demonstrates that constraining LLMs too rigidly limits their capabilities, while complete freedom leads to too many errors. The sweet spot involves detailed prompts with physics rules and examples, combined with robust error detection and recovery. As noted in [[week10|Week 10]], "it's still pretty brittle for complex stuff" but "when it works, it's very nice 😊".
-
-[SCREENSHOT PLACEHOLDER: HTML trace report showing synthesis pipeline]
-
-[DEMO VIDEO PLACEHOLDER: Error recovery system automatically fixing a crashed sketch]
+This evolution demonstrated that constraining LLMs too rigidly limits their capabilities, while complete freedom leads to too many errors. The sweet spot involves detailed prompts with Tölvera and Taichi rules and examples, combined with error detection and recovery. As noted in [[week10|Week 10]], "it's still pretty brittle for complex stuff" but "when it works, it's very nice 😊".
 
 ## 5. What's Left to Do (Future Work)
-
-### Immediate Improvements
-
-**Code Cleanup and Consolidation:**
-
-- Remove dead code from previous architectural iterations
-- Consolidate scattered prompt templates into organized structure
-- Improve state management consistency
-- Replace regex-based error detection with more robust parsing
-
-**Enhanced Context Selection:**
-
-- Move beyond keyword matching to semantic similarity
-- Implement proper RAG (Retrieval-Augmented Generation) for pattern selection
-- Dynamic context weighting based on behavior complexity
 
 ### Feature Extensions
 
@@ -672,35 +654,32 @@ While the current system focuses on `tv.vera` particle behaviors, the architectu
 
 - Multi-behavior composition and blending
 - Evolutionary parameter optimization
-- Real-time behavior modification during execution
-- Export to standalone executables
+- Real-time behavior modification during execution (live-coding examples)
+- Export experts and kernels to standalone executables and learn from these generations
 
 ### Research Directions
 
 **Improved Success Rates:**
 
-- Fine-tuning models specifically for Taichi code generation
-- Creating comprehensive test suites for automatic validation
+- Fine-tuning models specifically for Taichi code generation (but can be costly for data gathering)
+- Creating test suites for automatic validation
 - Developing better heuristics for behavior decomposition
 
 **User Experience Enhancements:**
 
-- Visual node-based editor showing synthesis pipeline
-- Web-based interface using Textual-web
+- Visual node-based editor showing synthesis pipeline (this is a whole idea we threw around, but this is like a 4 month project overall 😅)
 - Preset library of common behaviors
 - Community sharing of generated sketches
 
 ## Conclusion
 
-The Tölvera LLM Engine successfully transforms natural language descriptions into executable particle simulations, achieving what frontier models struggle with through specialized knowledge and careful engineering. The comparative analysis demonstrates that domain-specific systems can significantly outperform general-purpose models on specialized tasks, with our system achieving 60-85% success rates compared to near-zero success from frontier models on identical prompts.
+The Tölvera LLM Engine transforms natural language descriptions into executable particle simulations, achieving what frontier models struggle with through specialized knowledge and targeted context engineering. The comparative analysis demonstrates that domain-specific systems can significantly outperform general-purpose models on specialized tasks, with our system achieving 60-85% success rates compared to near-zero success from frontier models on identical prompts (without significant refinements).
 
-The project evolved from a simple proof-of-concept into a sophisticated multi-agent system with comprehensive debugging capabilities, an intuitive user interface, and automatic error recovery. The journey highlighted both the potential and limitations of current LLM technology for code generation, leading to practical solutions that balance automation with reliability.
+The project evolved from a simple proof-of-concept into a multi-agent system with debugging capabilities, an intuitive user interface, and automatic error recovery. The journey highlighted both the potential and limitations of current LLM technology for DSL code generation, leading to some practical solutions that balance automation with reliability.
 
-The terminal UI's bioluminescent aesthetic and marine metaphors create an engaging experience that makes users feel like they're cultivating digital life forms. When a user types "red predators chase blue prey," watches the system decompose and synthesize the behavior, and sees particles spring to life following their description while frontier models fail with basic API errors the value of specialized systems becomes clear.
+When a user types "_red predators chase blue prey_," and watches the system decompose and synthesize the behavior, and sees particles spring to life following their description while frontier models fail with basic API errors, the value of specialized systems becomes clear while using this type of DSL code generation.
 
-This work lowers the technical barriers to artificial life simulation while maintaining the flexibility and power that makes Tölvera compelling for both artists and researchers. The foundation is now in place for continued development, with clear paths forward for improving reliability, expanding capabilities, and building a community around accessible artificial life creation.
-
-The [GSoC Demo Video](https://www.youtube.com/watch?v=0puPLa05LeY) showcases the variety of behaviors that can be synthesized through natural language, from simple physics to complex ecosystems, demonstrating the significant advantage of our specialized system over general-purpose frontier models.
+This work lowers the technical barriers to artificial life simulation while maintaining the flexibility and power that makes Tölvera compelling for both artists and researchers. The foundation is now in place for continued development, with paths forward for improving reliability, expanding capabilities, and building a community around accessible artificial life creation via this pipeline.
 
 ---
 
@@ -727,11 +706,11 @@ Follow the complete development journey through the weekly journals:
 
 - **Demo Video:** [Natural Language Interface Walkthrough](https://www.youtube.com/watch?v=0puPLa05LeY)
 - **Source Code:** https://github.com/mclemcrew/tolvera/tree/final-gsoc-report
-- **Demo Scripts:** `examples/tolvera_llm_demo.py` and `examples/tolvera_textual_ui.py`
+- **Demo Scripts:** `ui_scripts/tolvera_llm_demo.py` and `ui_scripts/tolvera_textual_ui.py`
 - **Generated Sketches:** `examples/generated_sketches/`
 - **Trace Reports:** `examples/generated_sketches/traces/`
 - **Blog:** https://mclemcrew.github.io/GSoC25
 
 ---
 
-_Special thanks to the Tölvera community and GSoC mentors (jarm, victor-shepardson, Peter Wallace) for their support throughout this project._
+_Special thanks to the Tölvera community and GSoC mentors (Jack, Victor, and Peter) for their support throughout this project._
