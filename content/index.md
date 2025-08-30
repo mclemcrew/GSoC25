@@ -1,6 +1,6 @@
 ---
-title: "GSoC 2025: Tölvera NLI"
-description: "My project journal for Google Summer of Code 2025, focused on enhancing Tölvera with a Natural Language Interface."
+title: "GSoC 2025: Tölvera NLI - Project Completed!"
+description: "My completed Google Summer of Code 2025 project - a Natural Language Interface for Tölvera that outperforms frontier models on specialized tasks."
 tags:
   - gsoc
   - tolvera
@@ -8,37 +8,176 @@ tags:
   - llm
 ---
 
-Welcome to my project log for **Google Summer of Code 2025**! This site will serve as a public journal for my work on the Tölvera project.
+Welcome to the project documentation for **Google Summer of Code 2025**! This site documents my successful completion of the Tölvera Natural Language Interface project.
 
-## Project Overview
+> 🎉 **Project Successfully Completed!**
+>
+> After 12 weeks of development, the Tölvera NLI is now functional and outperforms (with some specific criteria) frontier models like Gemini 2.5 Pro and Claude Opus on Tölvera-specific tasks.
+>
+> **[[gsoc_final_report|📖 Read the Full Final Report]]** | **[🎬 Watch the Demo Video](https://www.youtube.com/watch?v=0puPLa05LeY)**
 
-My project focuses on enhancing creative workflows within the [Tölvera](https://github.com/Tolvera/tolvera) creative coding library. Here is the official abstract from my proposal:
+## Gallery of Generated Sketches
+
+<style>
+.video-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin: 30px 0;
+}
+
+.video-item {
+  text-align: center;
+}
+
+.video-item video {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.video-caption {
+  margin-top: 10px;
+  font-size: 0.9em;
+  color: #666;
+  font-style: italic;
+}
+
+.achievement-box {
+  background: #f0f7ff;
+  border-left: 4px solid #2196f3;
+  padding: 15px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.achievement-box h3 {
+  margin-top: 0;
+  color: #1976d2;
+}
+
+@media (max-width: 768px) {
+  .video-gallery {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+<div class="video-gallery">
+  <div class="video-item">
+    <video controls loop muted autoplay>
+      <source src="imgs/particle_motion_repel.mp4" type="video/mp4">
+    </video>
+    <div class="video-caption">Two species repel each other while moving</div>
+  </div>
+  
+  <div class="video-item">
+    <video controls loop muted autoplay>
+      <source src="imgs/complex_interactions.mp4" type="video/mp4">
+    </video>
+    <div class="video-caption">Complex self-organizing behavior</div>
+  </div>
+  
+  <div class="video-item">
+    <video controls loop muted autoplay>
+      <source src="imgs/boids-osc.mp4" type="video/mp4">
+    </video>
+    <div class="video-caption">Boids with OSC mapping</div>
+  </div>
+  
+  <div class="video-item">
+    <video controls loop muted autoplay>
+      <source src="imgs/particle-life.mp4" type="video/mp4">
+    </video>
+    <div class="video-caption">Particle Life simulation</div>
+  </div>
+</div>
+
+## The Textual User Interface
+
+![Textual UI Screenshot](imgs/system-screenshot.png)
+
+The completed interface allows users to type natural language descriptions and instantly generate working Tölvera simulations - no coding required!
+
+## Project Overview & Results
+
+My project successfully enhanced creative workflows within the [Tölvera](https://github.com/Tolvera/tolvera) creative coding library. Here is the official abstract from my proposal:
 
 > This project proposes to refine and significantly extend a functional proof-of-concept (POC) Natural Language Interface (NLI) for Tölvera, aiming to enhance creative workflows by improving accessibility for artists and researchers. The NLI translates natural language commands into Tölvera sketch generation and modification, acting as an interactive collaborator for users regardless of their coding expertise. Leveraging local Large Language Models (LLMs) via Ollama prioritizes user privacy and control. The existing tv.llm module, demonstrated for Flock and Slime simulations, uses Pydantic for validation and Jinja2 for reliable code generation. Core GSoC work involves expanding this architecture to more Tölvera modules (including tv.vera, tv.osc, tv.cv, tv.mp, tv.iml), refining prompt strategies, enhancing the user interface concept, and ensuring structured outputs. Evaluation will use functional tests, schema adherence metrics, qualitative user feedback, and LLM-as-a-judge assessments. This project aims to elevate the prototype into a core Tölvera feature, lowering technical barriers for the community of users.
 
-### The Goal
+<div class="achievement-box">
 
-The primary motivation for this project is to make the powerful tools in Tölvera more accessible. Tölvera is a fantastic Python environment for generative art, but its reliance on programming can be a hurdle for artists and researchers who aren't primarily coders. The goal is to build an NLI that acts as a bridge, translating a user's creative intent from natural language into functional Tölvera code.
+### 🏆 Key Achievements
+
+- **60-85% success rates** for various behavior types (gravity, interactions, species detection)
+- **Outperformed frontier models** - Our specialized system succeeded where Gemini 2.5 Pro and Claude Opus failed
+- **Product of Experts (PoE) architecture** - Revolutionary approach solving Taichi compilation issues
+- **Full Textual UI** with syntax highlighting, error recovery, and natural language refinement
+- **12 weeks of documented development** with weekly progress reports
+
+</div>
+
+### The Breakthrough: Product of Programmatic Experts
+
+The major architectural breakthrough came in Week 5 with the Product of Experts (PoE) system. Instead of generating monolithic scripts, the system synthesizes small `@ti.func` expert functions that compose together dynamically. This approach:
+
+- Solved critical Taichi GPU compilation errors
+- Enabled modular behavior composition
+- Achieved significantly higher success rates than traditional approaches
+
+### Comparative Analysis Results
+
+Our system was tested against frontier models (Gemini 2.5 Pro and Claude Opus) with remarkable results:
+
+**Test Case: Day/Night Cycle Behavior**
+
+- **Our System:** ✅ Worked on first attempt
+- **Gemini 2.5 Pro:** ❌ Multiple failures with Tölvera API errors
+- **Claude Opus:** ❌ Fundamental misunderstanding of module structure
+
+**Test Case: Food Competition**
+
+- **Our System:** ✅ Correct implementation with one refinement
+- **Gemini 2.5 Pro:** ⚠️ Works but incorrect mechanics
+- **Claude Opus:** ❌ Taichi scope violations, never runs
 
 ### How It Works
 
-The core of the project is the `tv.llm` module, which follows a clear, robust workflow:
+The core workflow of the completed `tv.llm` module:
 
-1.  A **user** provides a natural language command (e.g., "Create a flock with 2 species, one red and one blue").
-2.  The command is sent to the **Prompt Formulation** component, where it's enhanced with examples, schema definitions, and other context to create an effective prompt for the LLM. 
-3.  The enhanced prompt is sent to a local **Large Language Model** (LLM) running via Ollama. 
-4.  The LLM returns a structured **JSON configuration** based on the prompt. 
-5.  This JSON is **validated** against a Pydantic model to ensure all parameters are correct. If not, error handling is triggered.
-6.  Once validated, the configuration is passed to a **Jinja2 template**, which generates the final, executable Python code for the Tölvera sketch.
-7.  The user can then **execute the script**, see the visual output, and continue the conversation to iteratively refine their creation.
+1. **User** provides a natural language command (e.g., "Create a flock with 2 species, one red and one blue").
+2. **BehaviorOrchestrator** analyzes and decomposes the request into implementable components
+3. **StateManager** dynamically creates required states based on behavior needs
+4. **CodeGenerator** synthesizes Taichi expert functions with physics-aware prompts
+5. **TemplateRenderer** assembles experts and kernels into complete executable sketches
+6. The user can **execute the script**, see the visual output, and iteratively refine their creation
 
 ### Core Technologies
-* **Python**
-* **Tölvera**
-* **Ollama** (for local LLMs)
-* **Pydantic** (for data validation)
-* **Jinja2**
+
+- **Python**
+- **Tölvera**
+- **Ollama** (for local LLMs)
+- **Gemini 2.0 Flash** (primary synthesis model)
+- **Pydantic** (for data validation)
+- **Jinja2** (for template rendering)
+- **Textual** (for the terminal UI)
 
 ---
 
-You can follow my progress by exploring the notes on this site. I'll be documenting my weekly progress, technical challenges, and key learnings as I work to bring this interface to life.
+## Project Resources
+
+### Documentation
+
+- **[[gsoc_final_report|📊 Final Report]]** - Complete technical documentation with architecture diagrams
+- **[[journal/week1|Weekly Development Journals]]** - 12 weeks of detailed progress
+- **[[journal/midterm|Midterm Report]]** - 6-week implementation plan
+
+### Code & Demos
+
+- **[Demo Video](https://www.youtube.com/watch?v=0puPLa05LeY)** - Full walkthrough of the Natural Language Interface
+- **[Source Code](https://github.com/mclemcrew/tolvera/tree/final-gsoc-report)** - Complete implementation
+- **[Try It Yourself](https://github.com/mclemcrew/tolvera/tree/final-gsoc-report/ui_scripts)** - Demo scripts and UI
+
+---
+
+_Special thanks to the Tölvera community and GSoC mentors (Jack, Victor, and Peter) for their support throughout this project._
