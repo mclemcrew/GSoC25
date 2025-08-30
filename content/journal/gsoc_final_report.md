@@ -55,42 +55,42 @@ by MClem (me 🙂)
 
 <div class="video-gallery">
   <div class="video-item">
-    <video controls loop muted>
+    <video controls loop muted autoplay>
       <source src="../imgs/particle_motion_repel.mp4" type="video/mp4">
     </video>
     <div class="video-caption">Two species repel each other while moving across the screen.</div>
   </div>
   
   <div class="video-item">
-    <video controls loop muted>
+    <video controls loop muted autoplay>
       <source src="../imgs/complex_interactions.mp4" type="video/mp4">
     </video>
     <div class="video-caption">Complex self-organizing behavior between three species.</div>
   </div>
   
   <div class="video-item">
-    <video controls loop muted>
+    <video controls loop muted autoplay>
       <source src="../imgs/boids-osc.mp4" type="video/mp4">
     </video>
     <div class="video-caption">Boids with OSC Mapping through Ableton Live</div>
   </div>
   
   <div class="video-item">
-    <video controls loop muted>
+    <video controls loop muted autoplay>
       <source src="../imgs/prey_predator_demo.mp4" type="video/mp4">
     </video>
     <div class="video-caption">Two species compete for food and survival.</div>
   </div>
   
   <div class="video-item">
-    <video controls loop muted>
+    <video controls loop muted autoplay>
       <source src="../imgs/particle-life.mp4" type="video/mp4">
     </video>
     <div class="video-caption">Particle Life example</div>
   </div>
   
   <div class="video-item">
-    <video controls loop muted>
+    <video controls loop muted autoplay>
       <source src="../imgs/slime.mp4" type="video/mp4">
     </video>
     <div class="video-caption">Slime example</div>

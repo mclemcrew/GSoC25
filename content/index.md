@@ -8,13 +8,13 @@ tags:
   - llm
 ---
 
-Welcome to the project documentation for **Google Summer of Code 2025**! This site documents my successful completion of the Tölvera Natural Language Interface project.
+Welcome to the project documentation for the **Google Summer of Code 2025**! This site documents my journey through the Tölvera Natural Language Interface project.
 
-> 🎉 **Project Successfully Completed!**
+> 🎉 **Project Completed!**
 >
-> After 12 weeks of development, the Tölvera NLI is now functional and outperforms (with some specific criteria) frontier models like Gemini 2.5 Pro and Claude Opus on Tölvera-specific tasks.
+> After 12 weeks of development, the Tölvera NLI is now functional and outperforms (thankfully 😅) frontier models like Gemini 2.5 Pro and Claude Opus on Tölvera-specific tasks.
 >
-> **[[gsoc_final_report|📖 Read the Full Final Report]]** | **[🎬 Watch the Demo Video](https://www.youtube.com/watch?v=0puPLa05LeY)**
+> **[[gsoc_final_report|Read the Full Final Report]]** | **[Watch the Demo Video](https://www.youtube.com/watch?v=0puPLa05LeY)**
 
 ## Gallery of Generated Sketches
 
@@ -101,56 +101,48 @@ The completed interface allows users to type natural language descriptions and i
 
 ## Project Overview & Results
 
-My project successfully enhanced creative workflows within the [Tölvera](https://github.com/Tolvera/tolvera) creative coding library. Here is the official abstract from my proposal:
+My project enhanced creative workflows within the [Tölvera](https://github.com/Tolvera/tolvera) artificial life library. Here is the official abstract from my proposal:
 
 > This project proposes to refine and significantly extend a functional proof-of-concept (POC) Natural Language Interface (NLI) for Tölvera, aiming to enhance creative workflows by improving accessibility for artists and researchers. The NLI translates natural language commands into Tölvera sketch generation and modification, acting as an interactive collaborator for users regardless of their coding expertise. Leveraging local Large Language Models (LLMs) via Ollama prioritizes user privacy and control. The existing tv.llm module, demonstrated for Flock and Slime simulations, uses Pydantic for validation and Jinja2 for reliable code generation. Core GSoC work involves expanding this architecture to more Tölvera modules (including tv.vera, tv.osc, tv.cv, tv.mp, tv.iml), refining prompt strategies, enhancing the user interface concept, and ensuring structured outputs. Evaluation will use functional tests, schema adherence metrics, qualitative user feedback, and LLM-as-a-judge assessments. This project aims to elevate the prototype into a core Tölvera feature, lowering technical barriers for the community of users.
 
 <div class="achievement-box">
 
-### 🏆 Key Achievements
+### Key Achievements
 
 - **60-85% success rates** for various behavior types (gravity, interactions, species detection)
-- **Outperformed frontier models** - Our specialized system succeeded where Gemini 2.5 Pro and Claude Opus failed
-- **Product of Experts (PoE) architecture** - Revolutionary approach solving Taichi compilation issues
+- **Outperformed frontier models** - Our system succeeded where Gemini 2.5 Pro and Claude Opus failed for initial correct sketch generation
 - **Full Textual UI** with syntax highlighting, error recovery, and natural language refinement
 - **12 weeks of documented development** with weekly progress reports
 
 </div>
 
-### The Breakthrough: Product of Programmatic Experts
-
-The major architectural breakthrough came in Week 5 with the Product of Experts (PoE) system. Instead of generating monolithic scripts, the system synthesizes small `@ti.func` expert functions that compose together dynamically. This approach:
-
-- Solved critical Taichi GPU compilation errors
-- Enabled modular behavior composition
-- Achieved significantly higher success rates than traditional approaches
-
 ### Comparative Analysis Results
 
-Our system was tested against frontier models (Gemini 2.5 Pro and Claude Opus) with remarkable results:
+Our system was tested against frontier models (Gemini 2.5 Pro and Claude Opus) with the following results:
 
 **Test Case: Day/Night Cycle Behavior**
 
-- **Our System:** ✅ Worked on first attempt
-- **Gemini 2.5 Pro:** ❌ Multiple failures with Tölvera API errors
-- **Claude Opus:** ❌ Fundamental misunderstanding of module structure
+- **Our System (Gemini 2.0 Flash):** ✅ Worked on first attempt
+- **Gemini 2.5 Pro (Zero-shot):** ❌ Multiple failures with Tölvera API errors
+- **Claude Opus (Zero-shot):** ❌ Fundamental misunderstanding of module structure
+- **Gemini 2.5 Pro (Full Tölvera Context):** ✅ Generates after several refinements
+- **Claude Opus (Full Tölvera Context):** ✅ Generates after several refinements
 
 **Test Case: Food Competition**
 
-- **Our System:** ✅ Correct implementation with one refinement
-- **Gemini 2.5 Pro:** ⚠️ Works but incorrect mechanics
+- **Our System (Gemini 2.0 Flash):** ✅ Correct implementation with one refinement (for color)
+- **Gemini 2.5 Pro:** ⚠️ Works but incorrect mechanics after several refinements
 - **Claude Opus:** ❌ Taichi scope violations, never runs
 
 ### How It Works
 
-The core workflow of the completed `tv.llm` module:
-
 1. **User** provides a natural language command (e.g., "Create a flock with 2 species, one red and one blue").
 2. **BehaviorOrchestrator** analyzes and decomposes the request into implementable components
 3. **StateManager** dynamically creates required states based on behavior needs
-4. **CodeGenerator** synthesizes Taichi expert functions with physics-aware prompts
-5. **TemplateRenderer** assembles experts and kernels into complete executable sketches
-6. The user can **execute the script**, see the visual output, and iteratively refine their creation
+4. **SpeciesManager** create species requirements based on descriptions
+5. **CodeGenerator** synthesizes Taichi expert functions with physics-aware prompts
+6. **TemplateRenderer** assembles experts and kernels into complete executable sketches
+7. The user can **execute the script**, see the visual output, and iteratively refine their creation
 
 ### Core Technologies
 
@@ -168,8 +160,8 @@ The core workflow of the completed `tv.llm` module:
 
 ### Documentation
 
-- **[[gsoc_final_report|📊 Final Report]]** - Complete technical documentation with architecture diagrams
-- **[[journal/week1|Weekly Development Journals]]** - 12 weeks of detailed progress
+- **[[gsoc_final_report|Final Report]]** - Complete technical documentation with architecture diagrams
+- **[[journal/week1|Weekly Development Journals]]** - 12 weeks of progress
 - **[[journal/midterm|Midterm Report]]** - 6-week implementation plan
 
 ### Code & Demos
