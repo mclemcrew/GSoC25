@@ -11,11 +11,11 @@ tags:
 
 by MClem (me 🙂)
 
-**Project:** Enhancing Creative Workflows with a Natural Language Interface for Tölvera
+**Project:** _Enhancing Creative Workflows with a Natural Language Interface for Tölvera_
 
-**Organization:** Tölvera
+**Organization:** _Tölvera_
 
-**Mentors:** [Jack](https://github.com/jarmitage), [Victor](https://github.com/victor-shepardson), and [Peter]()
+**Mentors:** [Jack](https://github.com/jarmitage), [Victor](https://github.com/victor-shepardson), and [Peter](https://github.com/PeterWaIIace)
 
 **Final Pull Request:** https://github.com/afhverjuekki/tolvera/pull/56
 
