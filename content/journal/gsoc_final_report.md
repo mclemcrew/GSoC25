@@ -564,7 +564,7 @@ _Note: We used gemini-2.0-flash throughout our experimentation. The reason was f
 **Our System:**
 
 - Worked on first attempt
-- T day/night cycle is difficult to tell, but it's operational
+- Day/night cycle is difficult to tell, but it's operational
 - Species behaviors properly differentiated with colors
 
 ![[our-system-prompt1-initial.mp4]]
