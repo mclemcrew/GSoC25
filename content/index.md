@@ -16,6 +16,12 @@ Welcome to the project documentation for the **Google Summer of Code 2025**! Thi
 >
 > **[[gsoc_final_report|Read the Full Final Report]]** | **[Watch the Demo Video](https://www.youtube.com/watch?v=0puPLa05LeY)** | **[Final Overview Video](https://www.youtube.com/watch?v=jllyR3wAETc)**
 
+## Final GSoC Overview Video
+
+![GSoC Final Overview](https://www.youtube.com/watch?v=jllyR3wAETc)
+
+A summary of the entire 12-week GSoC development journey, showcasing the Natural Language Interface for Tölvera from concept to completion.
+
 ## Gallery of Generated Sketches
 
 <style>
