@@ -19,6 +19,12 @@ by MClem (me 🙂)
 
 **Final Pull Request:** https://github.com/afhverjuekki/tolvera/pull/56
 
+## Final GSoC Overview Video
+
+[![GSoC Final Overview](https://img.youtube.com/vi/jllyR3wAETc/0.jpg)](https://www.youtube.com/watch?v=jllyR3wAETc)
+
+**[Watch the Complete GSoC Project Overview](https://www.youtube.com/watch?v=jllyR3wAETc)** - A summary of the entire 12-week development journey, from initial architecture decisions to the final working Natural Language Interface.
+
 ## Gallery of Generated Sketches
 
 <style>
