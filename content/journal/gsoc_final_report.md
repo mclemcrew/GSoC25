@@ -21,9 +21,9 @@ by MClem (me 🙂)
 
 ## Final GSoC Overview Video
 
-[![GSoC Final Overview](https://img.youtube.com/vi/jllyR3wAETc/0.jpg)](https://www.youtube.com/watch?v=jllyR3wAETc)
+![GSoC Final Overview](https://www.youtube.com/watch?v=jllyR3wAETc)
 
-**[Watch the Complete GSoC Project Overview](https://www.youtube.com/watch?v=jllyR3wAETc)** - A summary of the entire 12-week development journey, from initial architecture decisions to the final working Natural Language Interface.
+A summary of the entire 12-week development journey, from initial architecture decisions to the final working Natural Language Interface.
 
 ## Gallery of Generated Sketches
 
@@ -535,7 +535,7 @@ Showcases all major features including:
 
 ![[system-screenshot.png]]
 
-[![Tölvera GSoC Demo](https://img.youtube.com/vi/0puPLa05LeY/0.jpg)](https://www.youtube.com/watch?v=0puPLa05LeY)
+![Tölvera GSoC Demo](https://www.youtube.com/watch?v=0puPLa05LeY)
 
 Provides an accessible interface featuring:
 
