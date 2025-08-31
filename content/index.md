@@ -14,7 +14,7 @@ Welcome to the project documentation for the **Google Summer of Code 2025**! Thi
 >
 > After 12 weeks of development, the Tölvera NLI is now functional and outperforms (thankfully 😅) frontier models like Gemini 2.5 Pro and Claude Opus on Tölvera-specific tasks.
 >
-> **[[gsoc_final_report|Read the Full Final Report]]** | **[Watch the Demo Video](https://www.youtube.com/watch?v=0puPLa05LeY)**
+> **[[gsoc_final_report|Read the Full Final Report]]** | **[Watch the Demo Video](https://www.youtube.com/watch?v=0puPLa05LeY)** | **[Final Overview Video](https://www.youtube.com/watch?v=jllyR3wAETc)**
 
 ## Gallery of Generated Sketches
 
@@ -167,9 +167,10 @@ Our system was tested against frontier models (Gemini 2.5 Pro and Claude Opus) w
 ### Code & Demos
 
 - **[Demo Video](https://www.youtube.com/watch?v=0puPLa05LeY)** - Full walkthrough of the Natural Language Interface
+- **[Final Overview Video](https://www.youtube.com/watch?v=jllyR3wAETc)** - Complete GSoC project summary
 - **[Source Code](https://github.com/mclemcrew/tolvera/tree/final-gsoc-report)** - Complete implementation
 - **[Try It Yourself](https://github.com/mclemcrew/tolvera/tree/final-gsoc-report/ui_scripts)** - Demo scripts and UI
 
 ---
 
-_Special thanks to the Tölvera community and GSoC mentors (Jack, Victor, and Peter) for their support throughout this project._
+_Special thanks to the Tölvera community and GSoC mentors (Jack, Victor, and Piotr) for their support throughout this project._

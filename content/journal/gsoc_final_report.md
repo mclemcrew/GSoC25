@@ -15,7 +15,7 @@ by MClem (me 🙂)
 
 **Organization:** _Tölvera_
 
-**Mentors:** [Jack](https://github.com/jarmitage), [Victor](https://github.com/victor-shepardson), and [Peter](https://github.com/PeterWaIIace)
+**Mentors:** [Jack](https://github.com/jarmitage), [Victor](https://github.com/victor-shepardson), and [Piotr](https://github.com/PeterWaIIace)
 
 **Final Pull Request:** https://github.com/afhverjuekki/tolvera/pull/56
 
@@ -502,7 +502,7 @@ Throughout the 12-week dev period, we hit the following milestones:
 
 ### Video Demonstration
 
-The [demo video](https://www.youtube.com/watch?v=0puPLa05LeY) provides a walkthrough of the Natural Language Interface for Tölvera, demonstrating:
+The [demo video](https://www.youtube.com/watch?v=0puPLa05LeY) provides a walkthrough of the Natural Language Interface for Tölvera, and the [final overview video](https://www.youtube.com/watch?v=jllyR3wAETc) gives a comprehensive summary of the entire GSoC project, demonstrating:
 
 - **Live Synthesis**: Real-time generation of particle behaviors from natural language descriptions
 - **Textual UI in Action**: The complete terminal interface with syntax highlighting and live preview
@@ -795,6 +795,7 @@ Follow the complete development journey through the weekly journals:
 ### Code and Resources
 
 - **Demo Video:** [Natural Language Interface Walkthrough](https://www.youtube.com/watch?v=0puPLa05LeY)
+- **Final Overview Video:** [Complete GSoC Project Summary](https://www.youtube.com/watch?v=jllyR3wAETc)
 - **Source Code:** https://github.com/mclemcrew/tolvera/tree/final-gsoc-report
 - **Demo Scripts:** `ui_scripts/tolvera_llm_demo.py` and `ui_scripts/tolvera_textual_ui.py`
 - **Generated Sketches:** `examples/generated_sketches/`
@@ -803,4 +804,4 @@ Follow the complete development journey through the weekly journals:
 
 ---
 
-_Special thanks to the Tölvera community and GSoC mentors (Jack, Victor, and Peter) for their support throughout this project._
+_Special thanks to the Tölvera community and GSoC mentors (Jack, Victor, and Piotr) for their support throughout this project._
