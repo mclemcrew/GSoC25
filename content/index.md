@@ -8,7 +8,7 @@ tags:
   - llm
 ---
 
-Welcome to the project documentation for the **Google Summer of Code 2025**! This site documents my journey through the Tölvera Natural Language Interface project.
+Welcome to my project documentation for the **Google Summer of Code 2025** for Tölvera! This site documents my journey through the Tölvera Natural Language Interface project.
 
 > 🎉 **Project Completed!**
 >
