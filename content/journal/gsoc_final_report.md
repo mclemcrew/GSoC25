@@ -272,124 +272,118 @@ The system uses an intelligent context selection mechanism that optimizes token 
 
 ```mermaid
 flowchart TB
-    classDef userNode fill:#e1f5e1,stroke:#4caf50,stroke-width:3px,color:#1b5e20
-    classDef orchestratorNode fill:#fff3e0,stroke:#ff9800,stroke-width:2px,color:#e65100
-    classDef analysisNode fill:#e3f2fd,stroke:#2196f3,stroke-width:2px,color:#0d47a1
-    classDef synthNode fill:#fce4ec,stroke:#e91e63,stroke-width:2px,color:#880e4f
-    classDef outputNode fill:#f3e5f5,stroke:#9c27b0,stroke-width:3px,color:#4a148c
+    %% Styling
+    classDef inputNode fill:#e1f5e1,stroke:#4caf50,stroke-width:3px,color:#1b5e20
+    classDef promptNode fill:#fff3e0,stroke:#ff9800,stroke-width:2px,color:#e65100
+    classDef llmNode fill:#e3f2fd,stroke:#2196f3,stroke-width:3px,color:#0d47a1
     classDef contextNode fill:#fffde7,stroke:#fbc02d,stroke-width:2px,color:#f57f17
+    classDef loaderNode fill:#f3e5f5,stroke:#9c27b0,stroke-width:2px,color:#4a148c
+    classDef outputNode fill:#e8f5e8,stroke:#388e3c,stroke-width:3px,color:#1b5e20
 
-    User["User Description<br/>'particles swarm and glow'"]
-    UI[Textual UI<br/>tolvera_llm_demo.py]
-    BO[BehaviorOrchestrator<br/>Main Controller]
-
-    User --> UI
-    UI --> BO
-
-    subgraph Analysis ["Analysis & Decomposition Stage"]
-        BA[BehaviorAnalyzer<br/>Decomposes Complex Behaviors]
-        DC{Decomposed<br/>Components?}
-        Components[Component List<br/>- Force behaviors<br/>- Visual effects<br/>- State updates]
-        SimplePath[Single Behavior]
-
-        BA --> DC
-        DC -->|Yes| Components
-        DC -->|No| SimplePath
+    %% Input Stage
+    subgraph InputStage ["Input Analysis"]
+        UserDesc["User Description<br/>'particles swarm and glow'"]
+        ExpertType["Expert Type<br/>force/interaction/visual"]
+        AddlContext["Additional Context<br/>species_info, component, etc."]
     end
 
-    BO --> BA
+    %% Prompt Loader Entry Point
+    PL["PromptLoader<br/>build_prompt_with_dynamic_context()"]
 
-    subgraph Detection ["Detection & Configuration"]
-        SM[StateManager<br/>Detects Required States]
-        SPM[SpeciesManager<br/>Detects Species]
-        CR[ColorResolver<br/>Maps Colors to RGBA]
-        States[Custom States<br/>- Global<br/>- Particle<br/>- Species]
-        Species[Species Config<br/>- IDs & Names<br/>- Colors<br/>- Interactions]
+    InputStage --> PL
 
-        SM --> States
-        SPM --> Species
-        SPM --> CR
+    %% Base Context (Always Loaded)
+    subgraph BaseContext ["Base Context (Always Loaded)"]
+        BaseAPI["Base Context<br/>library_docs.get_base_context()"]
+        CoreAPIs["• Core Tölvera API<br/>• Pixels API<br/>• Taichi fundamentals<br/>• State access patterns"]
     end
 
-    Components --> SM
-    Components --> SPM
-    SimplePath --> SM
-    SimplePath --> SPM
+    PL --> BaseAPI
+    BaseAPI --> CoreAPIs
 
-    subgraph Context ["Intelligent Context Selection"]
-        CS[ContextSelector<br/>LLM-Powered Selection]
-        BaseCtx[Base Context<br/>Core APIs Always Loaded]
-        SuppCtx[Supplementary Context<br/>Dynamically Selected Patterns]
-        MergedCtx[Merged Context]
+    %% LLM Context Selection
+    subgraph LLMSelection ["LLM-Powered Context Selection"]
+        CS["ContextSelector<br/>gemini-2.0-flash"]
 
-        CS --> BaseCtx
-        CS --> SuppCtx
-        BaseCtx --> MergedCtx
-        SuppCtx --> MergedCtx
-    end
-
-    Components --> CS
-    SimplePath --> CS
-
-    subgraph Synthesis ["Expert Synthesis Loop"]
-        CG[CodeGenerator<br/>Synthesizes Experts]
-        ExpertCode[Expert Functions<br/>@ti.func decorated]
-        BR[BehaviorRegistry<br/>Stores & Manages Experts]
-        CheckMore{More<br/>Components?}
-        KernelGen[Generate Kernels]
-
-        CG --> ExpertCode
-        ExpertCode --> BR
-        BR --> CheckMore
-        CheckMore -->|Yes| CG
-        CheckMore -->|No| KernelGen
-    end
-
-    MergedCtx --> CG
-    States --> CG
-    Species --> CG
-
-    subgraph Rendering ["Template Rendering"]
-        TR[TemplateRenderer<br/>Jinja2 Templates]
-
-        subgraph Kernels ["Kernel Generation<br/><br/>"]
-            IntKernel[Integration Kernel]
-            DrawKernel[Drawing Kernel]
-            UtilKernel[Utility Kernel]
+        subgraph SelectionPrompts ["Selection Prompts"]
+            SysPrompt["system.txt<br/>Selection criteria"]
+            UserPrompt["user.txt<br/>Formatted with inputs"]
         end
 
-        subgraph DataModels ["Data Model Rendering<br/><br/>"]
-            ExpertRender[Expert Functions]
-            ForceComp[Force Computation]
-            DrawComp[Drawing Computation]
-        end
+        LLMCall["LLM Analysis<br/>Pydantic-AI Agent"]
+        SelectionResult["ContextSelectionResponse<br/>• selected_contexts: List[str]<br/>• reasoning: str"]
 
-        SketchRender[render_sketch<br/>Final Assembly]
-
-        TR --> Kernels
-        TR --> DataModels
-        Kernels --> SketchRender
-        DataModels --> SketchRender
+        CS --> SelectionPrompts
+        SelectionPrompts --> LLMCall
+        LLMCall --> SelectionResult
     end
 
-    KernelGen --> TR
-    BR -.-> TR
-    States -.-> TR
-    Species -.-> TR
+    PL --> CS
 
-    SketchRender ==> FinalSketch
+    %% Available Context Library (37 options)
+    subgraph ContextLibrary ["Available Contexts (37 options)"]
+        BehaviorPatterns["Behavior Patterns<br/>• movement<br/>• flocking<br/>• interaction<br/>• temporal<br/>• boundaries"]
+        VisualPatterns["Visual Patterns<br/>• drawing<br/>• drawing_api<br/>• emergent"]
+        AlifePatterns["A-Life Patterns<br/>• cellular<br/>• alife_patterns<br/>• evolution<br/>• ecosystem<br/>• swarm"]
+        VeraPatterns["Tölvera Patterns<br/>• vera_patterns<br/>• vera_interactions<br/>• species_interactions"]
+        TechPatterns["Technical Patterns<br/>• taichi_crashes<br/>• initialization<br/>• configuration<br/>• temporal_updates"]
+    end
 
-    FinalSketch[["<br/>Generated Sketch<br/>Complete Python/Taichi Code<br/>Ready to Run"]]
+    SelectionResult -.-> ContextLibrary
 
-    class User userNode
-    class BO orchestratorNode
-    class BA,SM,SPM,CR analysisNode
-    class CS,BaseCtx,SuppCtx,MergedCtx contextNode
-    class CG,BR,ExpertCode,CheckMore,KernelGen synthNode
-    class TR,IntKernel,DrawKernel,UtilKernel,ExpertRender,ForceComp,DrawComp,SketchRender synthNode
-    class FinalSketch outputNode
-    class States outputNode
-    class Species outputNode
+    %% Dynamic Context Loading
+    subgraph DynamicLoading ["Dynamic Context Loading"]
+        ImportPatterns["_import_context_patterns()<br/>Dynamic Import System"]
+
+        subgraph LoadingMethods ["Loading Methods"]
+            DirectImport["Direct Import<br/>getattr(module, attr)"]
+            SectionLoad["Section Loading<br/>load_section(file, section)"]
+        end
+
+        ContextMapping["Context-to-Import Mapping<br/>37 entries with module paths"]
+        LoadedPatterns["Loaded Pattern Content<br/>Dict[context_name, content]"]
+
+        ImportPatterns --> ContextMapping
+        ContextMapping --> LoadingMethods
+        LoadingMethods --> LoadedPatterns
+    end
+
+    SelectionResult --> ImportPatterns
+
+    %% Context Merging
+    subgraph ContextMerging ["Context Merging & Prompt Building"]
+        PromptSections["Prompt Sections Assembly"]
+
+        subgraph FinalPrompt ["Final Prompt Structure"]
+            BaseSection["1. BASE CONTEXT<br/>Core APIs (always included)"]
+            FiveElement["2. Five-Element Structure<br/>synthesis/five_element_structure.txt"]
+            SuppSection["3. SUPPLEMENTARY CONTEXT<br/>LLM-selected patterns"]
+            StateSection["4. Available States<br/>Formatted state context"]
+            TaskSection["5. TASK SPECIFICATION<br/>Requirements & rules"]
+        end
+
+        MergedPrompt["Complete Merged Prompt<br/>Ready for CodeGenerator"]
+
+        PromptSections --> FinalPrompt
+        FinalPrompt --> MergedPrompt
+    end
+
+    CoreAPIs --> PromptSections
+    LoadedPatterns --> PromptSections
+
+    %% Output to Code Generation
+    CodeGen["CodeGenerator<br/>Expert Synthesis"]
+
+    MergedPrompt --> CodeGen
+
+    %% Apply styles
+    class UserDesc,ExpertType,AddlContext inputNode
+    class PL,PromptSections promptNode
+    class CS,LLMCall,SelectionResult,SysPrompt,UserPrompt llmNode
+    class BaseAPI,CoreAPIs,BehaviorPatterns,VisualPatterns,AlifePatterns,VeraPatterns,TechPatterns,LoadedPatterns contextNode
+    class ImportPatterns,DirectImport,SectionLoad,ContextMapping loaderNode
+    class MergedPrompt,CodeGen outputNode
+    class BaseSection,FiveElement,SuppSection,StateSection,TaskSection outputNode
 ```
 
 ### Core Components Implemented
