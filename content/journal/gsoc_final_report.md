@@ -272,7 +272,6 @@ The system uses an intelligent context selection mechanism that optimizes token 
 
 ```mermaid
 flowchart TB
-    %% Styling
     classDef inputNode fill:#e1f5e1,stroke:#4caf50,stroke-width:3px,color:#1b5e20
     classDef promptNode fill:#fff3e0,stroke:#ff9800,stroke-width:2px,color:#e65100
     classDef llmNode fill:#e3f2fd,stroke:#2196f3,stroke-width:3px,color:#0d47a1
@@ -280,21 +279,20 @@ flowchart TB
     classDef loaderNode fill:#f3e5f5,stroke:#9c27b0,stroke-width:2px,color:#4a148c
     classDef outputNode fill:#e8f5e8,stroke:#388e3c,stroke-width:3px,color:#1b5e20
 
-    %% Input Stage
+    PL["PromptLoader<br/>build_prompt_with_dynamic_context()"]
+    CodeGen["CodeGenerator<br/>Expert Synthesis"]
+    MergedPrompt["Complete Merged Prompt<br/>Ready for CodeGenerator"]
+
     subgraph InputStage ["Input Analysis"]
         UserDesc["User Description<br/>'particles swarm and glow'"]
         ExpertType["Expert Type<br/>force/interaction/visual"]
         AddlContext["Additional Context<br/>species_info, component, etc."]
     end
 
-    %% Prompt Loader Entry Point
-    PL["PromptLoader<br/>build_prompt_with_dynamic_context()"]
-
     UserDesc --> PL
     ExpertType --> PL
     AddlContext --> PL
 
-    %% Base Context (Always Loaded)
     subgraph BaseContext ["Base Context (Always Loaded)"]
         BaseAPI["Base Context<br/>library_docs.get_base_context()"]
         CoreAPIs["• Core Tölvera API<br/>• Pixels API<br/>• Taichi fundamentals<br/>• State access patterns"]
@@ -303,7 +301,6 @@ flowchart TB
     PL --> BaseAPI
     BaseAPI --> CoreAPIs
 
-    %% LLM Context Selection
     subgraph LLMSelection ["LLM-Powered Context Selection"]
         CS["ContextSelector<br/>gemini-2.0-flash"]
 
@@ -322,7 +319,6 @@ flowchart TB
 
     PL --> CS
 
-    %% Available Context Library (37 options)
     subgraph ContextLibrary ["Available Contexts (37 options)"]
         BehaviorPatterns["Behavior Patterns<br/>• movement<br/>• flocking<br/>• interaction<br/>• temporal<br/>• boundaries"]
         VisualPatterns["Visual Patterns<br/>• drawing<br/>• drawing_api<br/>• emergent"]
@@ -331,9 +327,12 @@ flowchart TB
         TechPatterns["Technical Patterns<br/>• taichi_crashes<br/>• initialization<br/>• configuration<br/>• temporal_updates"]
     end
 
-    SelectionResult -.-> ContextLibrary
+    SelectionResult -.-> BehaviorPatterns
+    SelectionResult -.-> VisualPatterns
+    SelectionResult -.-> AlifePatterns
+    SelectionResult -.-> VeraPatterns
+    SelectionResult -.-> TechPatterns
 
-    %% Dynamic Context Loading
     subgraph DynamicLoading ["Dynamic Context Loading"]
         ImportPatterns["_import_context_patterns()<br/>Dynamic Import System"]
 
@@ -352,7 +351,6 @@ flowchart TB
 
     SelectionResult --> ImportPatterns
 
-    %% Context Merging
     subgraph ContextMerging ["Context Merging & Prompt Building"]
         PromptSections["Prompt Sections Assembly"]
 
@@ -364,21 +362,24 @@ flowchart TB
             TaskSection["5. TASK SPECIFICATION<br/>Requirements & rules"]
         end
 
-        MergedPrompt["Complete Merged Prompt<br/>Ready for CodeGenerator"]
-
-        PromptSections --> FinalPrompt
-        FinalPrompt --> MergedPrompt
+        PromptSections --> BaseSection
+        PromptSections --> FiveElement
+        PromptSections --> SuppSection
+        PromptSections --> StateSection
+        PromptSections --> TaskSection
     end
 
     CoreAPIs --> PromptSections
     LoadedPatterns --> PromptSections
 
-    %% Output to Code Generation
-    CodeGen["CodeGenerator<br/>Expert Synthesis"]
+    BaseSection --> MergedPrompt
+    FiveElement --> MergedPrompt
+    SuppSection --> MergedPrompt
+    StateSection --> MergedPrompt
+    TaskSection --> MergedPrompt
 
     MergedPrompt --> CodeGen
 
-    %% Apply styles
     class UserDesc,ExpertType,AddlContext inputNode
     class PL,PromptSections promptNode
     class CS,LLMCall,SelectionResult,SysPrompt,UserPrompt llmNode
