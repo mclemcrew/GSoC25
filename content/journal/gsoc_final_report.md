@@ -311,7 +311,7 @@ flowchart TB
         end
 
         LLMCall["LLM Analysis<br/>Pydantic-AI Agent"]
-        SelectionResult["ContextSelectionResponse<br/>• selected_contexts: List[str]<br/>• reasoning: str"]
+        SelectionResult["ContextSelectionResponse<br/>• selected_contexts: List of strings<br/>• reasoning: str"]
 
         CS --> SelectionPrompts
         SelectionPrompts --> LLMCall
@@ -341,7 +341,7 @@ flowchart TB
         end
 
         ContextMapping["Context-to-Import Mapping<br/>37 entries with module paths"]
-        LoadedPatterns["Loaded Pattern Content<br/>Dict[context_name, content]"]
+        LoadedPatterns["Loaded Pattern Content<br/>Dictionary of context_name to content"]
 
         ImportPatterns --> ContextMapping
         ContextMapping --> LoadingMethods
