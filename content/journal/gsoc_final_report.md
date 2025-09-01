@@ -281,7 +281,7 @@ flowchart TB
     classDef outputNode fill:#e8f5e8,stroke:#388e3c,stroke-width:3px,color:#1b5e20
 
     %% Input Stage
-    subgraph InputStage["Input Analysis"]
+    subgraph InputStage ["Input Analysis"]
         UserDesc["User Description<br/>'particles swarm and glow'"]
         ExpertType["Expert Type<br/>force/interaction/visual"]
         AddlContext["Additional Context<br/>species_info, component, etc."]
@@ -290,10 +290,12 @@ flowchart TB
     %% Prompt Loader Entry Point
     PL["PromptLoader<br/>build_prompt_with_dynamic_context()"]
 
-    InputStage --> PL
+    UserDesc --> PL
+    ExpertType --> PL
+    AddlContext --> PL
 
     %% Base Context (Always Loaded)
-    subgraph BaseContext["Base Context (Always Loaded)"]
+    subgraph BaseContext ["Base Context (Always Loaded)"]
         BaseAPI["Base Context<br/>library_docs.get_base_context()"]
         CoreAPIs["• Core Tölvera API<br/>• Pixels API<br/>• Taichi fundamentals<br/>• State access patterns"]
     end
@@ -302,10 +304,10 @@ flowchart TB
     BaseAPI --> CoreAPIs
 
     %% LLM Context Selection
-    subgraph LLMSelection["LLM-Powered Context Selection"]
+    subgraph LLMSelection ["LLM-Powered Context Selection"]
         CS["ContextSelector<br/>gemini-2.0-flash"]
 
-        subgraph SelectionPrompts["Selection Prompts"]
+        subgraph SelectionPrompts ["Selection Prompts"]
             SysPrompt["system.txt<br/>Selection criteria"]
             UserPrompt["user.txt<br/>Formatted with inputs"]
         end
@@ -321,7 +323,7 @@ flowchart TB
     PL --> CS
 
     %% Available Context Library (37 options)
-    subgraph ContextLibrary["Available Contexts (37 options)"]
+    subgraph ContextLibrary ["Available Contexts (37 options)"]
         BehaviorPatterns["Behavior Patterns<br/>• movement<br/>• flocking<br/>• interaction<br/>• temporal<br/>• boundaries"]
         VisualPatterns["Visual Patterns<br/>• drawing<br/>• drawing_api<br/>• emergent"]
         AlifePatterns["A-Life Patterns<br/>• cellular<br/>• alife_patterns<br/>• evolution<br/>• ecosystem<br/>• swarm"]
@@ -332,10 +334,10 @@ flowchart TB
     SelectionResult -.-> ContextLibrary
 
     %% Dynamic Context Loading
-    subgraph DynamicLoading["Dynamic Context Loading"]
+    subgraph DynamicLoading ["Dynamic Context Loading"]
         ImportPatterns["_import_context_patterns()<br/>Dynamic Import System"]
 
-        subgraph LoadingMethods["Loading Methods"]
+        subgraph LoadingMethods ["Loading Methods"]
             DirectImport["Direct Import<br/>getattr(module, attr)"]
             SectionLoad["Section Loading<br/>load_section(file, section)"]
         end
@@ -351,10 +353,10 @@ flowchart TB
     SelectionResult --> ImportPatterns
 
     %% Context Merging
-    subgraph ContextMerging["Context Merging & Prompt Building"]
+    subgraph ContextMerging ["Context Merging & Prompt Building"]
         PromptSections["Prompt Sections Assembly"]
 
-        subgraph FinalPrompt["Final Prompt Structure"]
+        subgraph FinalPrompt ["Final Prompt Structure"]
             BaseSection["1. BASE CONTEXT<br/>Core APIs (always included)"]
             FiveElement["2. Five-Element Structure<br/>synthesis/five_element_structure.txt"]
             SuppSection["3. SUPPLEMENTARY CONTEXT<br/>LLM-selected patterns"]
